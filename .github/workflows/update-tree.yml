@@ -5,7 +5,7 @@ on:
     branches:
       - main  # 기본 브랜치가 master라면 master로 변경
 permissions:
-  contnets : write
+  contents : write
 
 jobs:
   build:
