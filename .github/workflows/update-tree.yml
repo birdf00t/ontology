@@ -1,0 +1,31 @@
+name: Update Directory Tree in README
+
+on:
+  push:
+    branches:
+      - main  # 기본 브랜치가 master라면 master로 변경
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install tree and update README
+        run: |
+          sudo apt-get install -y tree
+          TREE_CONTENT=$(tree -a -I ".git|node_modules|.DS_Store" --noreport)
+          START="<!-- TREE_START -->"
+          END="<!-- TREE_END -->"
+          awk -v start="$START" -v end="$END" -v tree="\`\`\`text\n$TREE_CONTENT\n\`\`\`" '
+              $0 ~ start { print $0; print tree; skip=1; next }
+              $0 ~ end { skip=0 }
+              !skip { print }
+          ' README.md > README.tmp && mv README.tmp README.md
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: auto-update directory tree in README"
+

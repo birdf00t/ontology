@@ -1,12 +1,5 @@
-```
-.
-├── agent.py # sql, sparql 랭체인 에이전트
-├── data # sql, owl 폴더
-│   └── folder_ex
-├── db.py # sql, owl 로딩 및 연결
-├── llm.py # llm 객체 선언
-└── main.py # 메인 실행
-```
+<<!--TREE_START-->
+<<!--TREE_END-->
 
 ## 실험 대상
 1. LLM + SQL 에이전트 + DB
