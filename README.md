@@ -2,6 +2,20 @@
 
 ## 프로젝트 구조
 <!-- TREE_START -->
+```text
+.
+├── .github
+│   └── workflows
+│       └── update-tree.yml
+├── .gitignore
+├── README.md
+├── agent.py
+├── data
+│   └── .gitkeep
+├── db.py
+├── llm.py
+└── main.py
+```
 <!-- TREE_END -->
 
 ## 실험 대상
