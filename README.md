@@ -1,6 +1,6 @@
+## 폴더 구조
 ```
 .
-├── .gitignore
 ├── agent.py
 ├── data
 │   └── folder_ex
@@ -9,7 +9,6 @@
 ├── main.py
 └── README.md
 ```
-
 
 ## 실험 대상
 1. LLM + SQL 에이전트 + DB
