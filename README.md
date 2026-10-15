@@ -1,3 +1,16 @@
+```
+.
+├── .gitignore
+├── agent.py
+├── data
+│   └── folder_ex
+├── db.py
+├── llm.py
+├── main.py
+└── README.md
+```
+
+
 ## 실험 대상
 1. LLM + SQL 에이전트 + DB
 2. LLM + SPARQL 에이전트 + OWL + DB
@@ -17,6 +30,5 @@ code : https://github.com/NadeenAhmad/RIGOR
 BIRD 사용  
 paper : https://arxiv.org/pdf/2305.03111  
 code : https://bird-bench.github.io/
-
 
 
