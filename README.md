@@ -6,8 +6,7 @@
 │   └── folder_ex
 ├── db.py # sql, owl 로딩 및 연결
 ├── llm.py # llm 객체 선언
-├── main.py # 메인 실행
-└── README.md
+└── main.py # 메인 실행
 ```
 
 ## 실험 대상
