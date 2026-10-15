@@ -1,4 +1,3 @@
-## 폴더 구조
 ```
 .
 ├── agent.py # sql, sparql 랭체인 에이전트
