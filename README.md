@@ -1,5 +1,8 @@
-<<!--TREE_START-->
-<<!--TREE_END-->
+# 내 프로젝트
+
+## 프로젝트 구조
+<!-- TREE_START -->
+<!-- TREE_END -->
 
 ## 실험 대상
 1. LLM + SQL 에이전트 + DB
