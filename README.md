@@ -16,14 +16,8 @@
 <!-- TREE_END -->
 
 ## 실험 대상
-1. LLM + SQL 에이전트 + DB
-2. LLM + SPARQL 에이전트 + OWL + DB
-
-## LLM
-클로드 사용
-
-## SQL/SPARQL 에이전트
-랭체인 사용
+1. SQL 에이전트(클로드) + DB
+2. SPARQL 에이전트(클로드) + OWL + DB
 
 ## OWL
 RIGOR 사용  
