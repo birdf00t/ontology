@@ -17,10 +17,10 @@
 
 ## 실험 대상
 1. SQL 에이전트(클로드) + DB
-2. SPARQL 에이전트(클로드) + OWL + DB
+2. SPARQL 에이전트(클로드) + Ontop(OWL+R2RML)+ DB
 
 ## OWL
-RIGOR 사용  
+RIGOR 사용
 paper : https://arxiv.org/abs/2506.01232  
 code : https://github.com/NadeenAhmad/RIGOR
 
