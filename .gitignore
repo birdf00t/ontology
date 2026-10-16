@@ -1,6 +1,8 @@
 #mac
 .DS_Store
 
+tools/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
