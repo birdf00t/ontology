@@ -1,9 +1,21 @@
 #mac
 .DS_Store
 
+paper/
 tools/
+log/
+review/
+
+# data: 단계별 코드 폴더만 올리고 나머지(질문·정답·OWL·R2RML 등 생성물)는 올리지 않는다
 data/*
 !data/*.py
+!data/1. sqlite to pg/
+!data/2. query_filter/
+!data/3. RIGOR_edit/
+# 위 폴더 안의 원본 데이터는 제외
+data/**/*.sqlite
+data/**/*.dump
+data/2. query_filter/train.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

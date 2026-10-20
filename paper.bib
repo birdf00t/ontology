@@ -1,0 +1,87 @@
+% BIRD 벤치마크
+@inproceedings{li2023bird,
+  author        = {Li, Jinyang and Hui, Binyuan and Qu, Ge and Yang, Jiaxi and Li, Binhua and Li, Bowen and Wang, Bailin and Qin, Bowen and Cao, Rongyu and Geng, Ruiying and Huo, Nan and Zhou, Xuanhe and Ma, Chenhao and Li, Guoliang and Chang, Kevin C.C. and Huang, Fei and Cheng, Reynold and Li, Yongbin},
+  title         = {Can {LLM} Already Serve as a Database Interface? A {BI}g Bench for Large-Scale Database Grounded Text-to-{SQL}s},
+  booktitle     = {Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track},
+  year          = {2023},
+  eprint        = {2305.03111},
+  archivePrefix = {arXiv}
+}
+
+% 그래프 기본 정의: 정점·간선, 루프, 차수, 경로, 순환, 별, 트리·숲, 연결 요소, 지름, 순환 공간의 차원
+@book{diestel2017graph,
+  author    = {Diestel, Reinhard},
+  title     = {Graph Theory},
+  edition   = {5},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {173},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  year      = {2017},
+  doi       = {10.1007/978-3-662-53622-3}
+}
+
+% 단일순환 그래프(unicyclic graph), 순환 계수 = 간선 - 정점 + 연결 요소
+@book{harary1969graph,
+  author    = {Harary, Frank},
+  title     = {Graph Theory},
+  publisher = {Addison-Wesley},
+  address   = {Reading, MA},
+  year      = {1969}
+}
+
+% RIGOR: 관계형 DB 스키마 -> OWL 온톨로지 생성 (RAG + LLM)
+@inproceedings{fathallah2026rigor,
+  author        = {Fathallah, Nadeen and Nayyeri, Mojtaba and Yogi, Athish A and Thapa, Ratan Bahadur and Tautenhahn, Hans-Michael and Schnurpel, Anton and Staab, Steffen},
+  title         = {Retrieval-Augmented Generation of Ontologies from Relational Databases},
+  booktitle     = {ISWC 2026},
+  year          = {2026},
+  eprint        = {2506.01232},
+  archivePrefix = {arXiv},
+  note          = {Accepted at ISWC 2026 (arXiv comment); track unconfirmed}
+}
+
+% Ontop: SPARQL -> SQL 번역 방식(질의 재작성, 매핑 풀기, 최적화)을 설명한 논문
+@article{calvanese2017ontop,
+  author    = {Calvanese, Diego and Cogrel, Benjamin and Komla-Ebri, Sarah and Kontchakov, Roman and Lanti, Davide and Rezk, Martin and Rodriguez-Muro, Mariano and Xiao, Guohui},
+  title     = {Ontop: Answering {SPARQL} Queries over Relational Databases},
+  journal   = {Semantic Web},
+  volume    = {8},
+  number    = {3},
+  pages     = {471--487},
+  year      = {2017},
+  publisher = {IOS Press},
+  doi       = {10.3233/SW-160217}
+}
+
+% Ontop v4 소개 (ISWC 2020 리소스 트랙)
+@inproceedings{xiao2020ontop,
+  author    = {Xiao, Guohui and Lanti, Davide and Kontchakov, Roman and Komla-Ebri, Sarah and G{\"u}zel-Kalaycı, Elem and Ding, Linfang and Corman, Julien and Cogrel, Benjamin and Calvanese, Diego and Botoeva, Elena},
+  title     = {The Virtual Knowledge Graph System Ontop},
+  booktitle = {The Semantic Web -- ISWC 2020},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12507},
+  pages     = {259--277},
+  year      = {2020},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-030-62466-8_17}
+}
+
+# spider에서 질문 난이도 참고
+@inproceedings{yu2018spider,
+  title     = {Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-{SQL} Task},
+  author    = {Yu, Tao and Zhang, Rui and Yang, Kai and Yasunaga, Michihiro and Wang, Dongxu and Li, Zifan and Ma, James and Li, Irene and Yao, Qingning and Roman, Shanelle and Zhang, Zilin and Radev, Dragomir},
+  booktitle = {Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {3911--3921},
+  year      = {2018},
+  publisher = {Association for Computational Linguistics},
+  address   = {Brussels, Belgium},
+  doi       = {10.18653/v1/D18-1425}
+}
+
+@misc{spider_eval_code,
+  title        = {Spider: Yale Semantic Parsing and Text-to-{SQL} Challenge (evaluation.py)},
+  author       = {Yu, Tao and others},
+  howpublished = {\url{https://github.com/taoyds/spider}},
+  note         = {Hardness criteria in \texttt{eval\_hardness}}
+}
