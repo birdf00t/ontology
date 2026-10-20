@@ -4,21 +4,19 @@
 # folders
 tools/
 log/
-
-output/
-!output/*py
+__pycache__/
 
 # 확장자
 *.jsonl
 *.log
-*.r2rml
-*.owl
 *.json
 *.sqlite
+*.csv
 
 # Environments
 .env
 .venv
+
 
 # 예외
 !data/2. query_filter/train.json

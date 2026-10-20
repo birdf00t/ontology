@@ -1,0 +1,1983 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:prov="http://www.w3.org/ns/prov#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_ssn">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/ssn"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.ssn' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Social Security Number of the patient, a national identification number. This is sensitive personal data. Derived from column patients.ssn (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">ssn</rdfs:label>
+    <rdfs:label xml:lang="en">social security number</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#all_prevalences_OCCURRENCES">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'all_prevalences.OCCURRENCES' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Count of individuals or instances in the reference population for which the item occurs. This is a quantitative count (numerator of the prevalence), not a categorical code. Optional. Source column all_prevalences.OCCURRENCES; datatype xsd:integer.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">OCCURRENCES</rdfs:label>
+    <rdfs:label xml:lang="en">occurrences</rdfs:label>
+    <rdfs:label xml:lang="en">all prevalences OCCURRENCES</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences/OCCURRENCES"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#AllPrevalences"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_prefix">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/prefix"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.prefix' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Honorific or title preceding the patient's name, for example Mr., Mrs., Ms., or Dr. This is a categorical text value. Derived from column patients.prefix (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">prefix</rdfs:label>
+    <rdfs:label xml:lang="en">name prefix</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#allergies_hasPatients">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Allergies"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'allergies.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an allergy record to the patient who has the allergy. Derived from the foreign key allergies.PATIENT, which references patients.patient. The column is mandatory (NOT NULL) and is part of the composite primary key, so every allergy record refers to exactly one patient.</rdfs:comment>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">allergies has Patients</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies/PATIENT"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Careplans">
+    <rdfs:comment xml:lang="en">Class generated from source table 'careplans'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A care plan record, derived from source table 'careplans'. It describes a planned course of clinical care for a patient. The plan may be initiated during a clinical encounter. It has a start date, an optional stop date, a coded care plan type, and an optional coded reason. Each row corresponds to one care plan instance. The ID column is nullable and not declared unique, so it is not modeled as a key.</rdfs:comment>
+    <rdfs:subClassOf rdf:nodeID="Nc98c037a5dc94d8786c33bc7e1a76029"/>
+    <rdfs:subClassOf rdf:nodeID="Nd41da3be25bb4663a5d353b64ca5c337"/>
+    <rdfs:subClassOf rdf:nodeID="N317bf524870246bf8ac57ffec310e923"/>
+    <rdfs:subClassOf rdf:nodeID="N27122ae6d50142ed9c0b99ec09887774"/>
+    <rdfs:subClassOf rdf:nodeID="N964abd7c09614d129e4b8e8f66356dc8"/>
+    <rdfs:subClassOf rdf:nodeID="Nc199026db93840d98e3f6633bc253727"/>
+    <rdfs:subClassOf rdf:nodeID="N07842959e51d47e7a4e6e680bd6f5f81"/>
+    <rdfs:subClassOf rdf:nodeID="Nc8e29c64df6c4ff3a2690cd05a60223a"/>
+    <rdfs:subClassOf rdf:nodeID="Ne1d7f8d3b7804a2ea18c2caf4eb585d7"/>
+    <rdfs:subClassOf rdf:nodeID="N0ff7f4ffeb24455eaf7a5ff5e714a9cd"/>
+    <rdfs:subClassOf rdf:nodeID="N7e2ea2ea13e34cba81f738c27087d497"/>
+    <rdfs:subClassOf rdf:nodeID="N30cb6a24c11c4b3aacd89917635dc8d9"/>
+    <rdfs:subClassOf rdf:nodeID="N7dcdbc88bee14cdbb70c0e3401bc79e7"/>
+    <rdfs:subClassOf rdf:nodeID="Na03eb7a02ddb4286935a4214011d5d9d"/>
+    <rdfs:subClassOf rdf:nodeID="N835f0bc9e73a47af866c278e232eab21"/>
+    <rdfs:subClassOf rdf:nodeID="Nfe28e4015cad47048e7255df5892e280"/>
+    <rdfs:subClassOf rdf:nodeID="Ne73197fbb7b749e2af9c3e02b69125b2"/>
+    <rdfs:subClassOf rdf:nodeID="N389a1a72f32c41cbbc60a1391361ee6f"/>
+    <rdfs:label xml:lang="en">Careplans</rdfs:label>
+    <rdfs:label xml:lang="en">Care Plan</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:disjointWith rdf:resource="http://example.org/ontology#Patients_Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N37202dae244d45569b410aeb68ba32c3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_CODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#all_prevalences_PREVALENCE_RATE">
+    <rdfs:domain rdf:resource="http://example.org/ontology#AllPrevalences"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'all_prevalences.PREVALENCE RATE' with range xsd:double.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Prevalence expressed as a proportion, typically OCCURRENCES divided by POPULATION COUNT (expected range 0 to 1). Optional. Source column all_prevalences.PREVALENCE RATE; datatype xsd:double.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences/PREVALENCE%20RATE"/>
+    <rdfs:label xml:lang="en">PREVALENCE RATE</rdfs:label>
+    <rdfs:label xml:lang="en">all prevalences PREVALENCE RATE</rdfs:label>
+    <rdfs:label xml:lang="en">prevalence rate</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nca3a7f02379a45ec92b9e7269a2850d2">
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_ID"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#all_prevalences_POPULATION_TYPE">
+    <rdfs:label xml:lang="en">POPULATION TYPE</rdfs:label>
+    <rdfs:label xml:lang="en">all prevalences POPULATION TYPE</rdfs:label>
+    <rdfs:label xml:lang="en">population type</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences/POPULATION%20TYPE"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#AllPrevalences"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'all_prevalences.POPULATION TYPE' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Categorical label describing the reference population over which the prevalence was computed (e.g. a living or all-patients population). Stored as free text; no closed value list is documented in the source. Optional. Source column all_prevalences.POPULATION TYPE; datatype xsd:string.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Encounters">
+    <rdfs:subClassOf rdf:nodeID="N10dc293ccea14c9d99b78c457bd13532"/>
+    <rdfs:subClassOf rdf:nodeID="N09f2dcadf8a840848c87a9cfe265c17a"/>
+    <rdfs:subClassOf rdf:nodeID="Nded0d8e6775448399b64a2821139b474"/>
+    <rdfs:subClassOf rdf:nodeID="N88cc98fb820f44af911af3413b631cc2"/>
+    <rdfs:subClassOf rdf:nodeID="Nef38cc4cc3d04a03b939d42e0958b159"/>
+    <rdfs:subClassOf rdf:nodeID="Ndaaa57c23a1d441581b8b0b9f763f898"/>
+    <rdfs:subClassOf rdf:nodeID="Nde025ede16774c2189e5e10657a363d9"/>
+    <rdfs:subClassOf rdf:nodeID="N61b915a3a5f14fc2b0351d88232b3a74"/>
+    <rdfs:subClassOf rdf:nodeID="Nad7a058cd7c243169a08dc82e51bb7e0"/>
+    <rdfs:subClassOf rdf:nodeID="N26248f84d8b8471184a6f397d958fa78"/>
+    <rdfs:subClassOf rdf:nodeID="N5c7f2566dc8c4fc6a901e9b723f888af"/>
+    <rdfs:subClassOf rdf:nodeID="Nd99219c6652e4b43b6482836a96da77e"/>
+    <rdfs:subClassOf rdf:nodeID="Ndd20783a3ced4af7b848eb6c56ee52a4"/>
+    <rdfs:subClassOf rdf:nodeID="N468ebde8bad74c0bb717db6769b4c75f"/>
+    <rdfs:subClassOf rdf:nodeID="Ndf7ca53b9b244237906298fad8f7e956"/>
+    <rdfs:subClassOf rdf:nodeID="Na5bf326ad84746699913fe1b86522a8c"/>
+    <rdfs:label xml:lang="en">Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">Encounter</rdfs:label>
+    <rdfs:comment xml:lang="en">Class generated from source table 'encounters'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical encounter is an interaction between a patient and a healthcare provider on a given date, such as a visit, consultation, admission, or check-up. Each instance corresponds to one row of the source table 'encounters' and is identified by encounters.ID.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical encounter record from the source table 'encounters', identified by the primary key column encounters.ID.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Class generated from source table 'encounters'; referenced by conditions.ENCOUNTER.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical encounter between a patient and a healthcare provider. Each instance corresponds to a row of the source table 'encounters'. It is referenced here as the target of the immunization-to-encounter foreign key.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical encounter (visit or contact) between a patient and the healthcare system, derived from source table 'encounters'. Referenced here as the target of the medications.ENCOUNTER foreign key.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Class generated from source table 'encounters'; a clinical encounter or visit between a patient and a healthcare provider.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters"/>
+    <owl:hasKey rdf:nodeID="N4df4fc5510ae4093948229184d54b4ea"/>
+    <owl:hasKey rdf:nodeID="N1c4ac18b142d401a8ea0a1e35d1309b5"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:disjointWith rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1655a07bba41482dbc1d26543e0df447">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_DATE"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0b26c3b392b5497b80b513030bd5c0a6">
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_START"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N30cb6a24c11c4b3aacd89917635dc8d9">
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_DESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#immunizations_hasEncounters">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Immunizations"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'immunizations.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an immunization record to the clinical encounter during which the vaccine was administered. This is the foreign key immunizations.ENCOUNTER referencing encounters.ID. The column is not null and is part of the composite primary key.</rdfs:comment>
+    <rdfs:label xml:lang="en">immunizations has Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">immunization during encounter</rdfs:label>
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/immunizations/ENCOUNTER"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nead7db54f02940ceadd42bc3336baea7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_POPULATION_TYPE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc56dac5709fe44f8921af5babc5bf374">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_DESCRIPTION">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/DESCRIPTION"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">care plan description</rdfs:label>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the care plan type corresponding to careplans_CODE. From column careplans.DESCRIPTION (xsd:string).</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_hasEncounters">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/ENCOUNTER"/>
+    <rdfs:label xml:lang="en">procedures has Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">procedure performed during encounter</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'procedures.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a procedure to the clinical encounter during which it was performed. Foreign-key relationship from procedures.ENCOUNTER to encounters.ID; nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_DESCRIPTION">
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">procedure description</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'procedures.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the procedure corresponding to procedures.CODE. Source column procedures.DESCRIPTION; datatype xsd:string; nullable.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/DESCRIPTION"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#all_prevalences_ITEM">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences/ITEM"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#AllPrevalences"/>
+    <rdfs:label xml:lang="en">ITEM</rdfs:label>
+    <rdfs:label xml:lang="en">all prevalences ITEM</rdfs:label>
+    <rdfs:label xml:lang="en">prevalence item</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'all_prevalences.ITEM' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Name or identifier of the item (e.g. condition, medication or other concept) whose prevalence is reported. Primary key of the source table: mandatory and identifying for each prevalence record. Source column all_prevalences.ITEM; datatype xsd:string.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N022f12805868417c99bce2ac707abed2">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasEncounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N24c02b48471f4d46b1f880dab9a45eb5">
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_UNITS">
+    <rdfs:label xml:lang="en">UNITS</rdfs:label>
+    <rdfs:label xml:lang="en">observations UNITS</rdfs:label>
+    <rdfs:label xml:lang="en">observation units</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/UNITS"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'observations.UNITS' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The unit of measure for the observation value, for example 'cm', 'kg' or 'mm[Hg]'. It is likely expressed in UCUM notation, and this is not confirmed by documentation. Source column observations.UNITS has datatype xsd:string and is nullable.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9e8a7c60eb1846cfb3c837ac3ff13487">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#conditions_START"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Procedures">
+    <rdfs:comment xml:lang="en">Class generated from source table 'procedures'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical procedure performed on a patient, optionally within a specific encounter, identified by a procedure code and described textually, with an optional coded reason. Generated from source table 'procedures'.</rdfs:comment>
+    <rdfs:subClassOf rdf:nodeID="N3af36bb9b2f2425a945b8b56b78b4f1c"/>
+    <rdfs:subClassOf rdf:nodeID="Ndd5a7d0ecf6e40a6964bcdfc6bacc16e"/>
+    <rdfs:subClassOf rdf:nodeID="Nb00d811b17f442b48db2aa7582ae3fed"/>
+    <rdfs:subClassOf rdf:nodeID="N593a06ff28a1436cbf6b89143fc9154d"/>
+    <rdfs:subClassOf rdf:nodeID="N145fa3aff0d14b8a90489ed821837202"/>
+    <rdfs:subClassOf rdf:nodeID="N1f702d3c50c448618e5bfeee70e16608"/>
+    <rdfs:subClassOf rdf:nodeID="N7cfabb38c09346fd9075c9fb898243fd"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Unnamed"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures"/>
+    <rdfs:label xml:lang="en">Procedures</rdfs:label>
+    <rdfs:label xml:lang="en">Procedure</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_STOP">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">STOP</rdfs:label>
+    <rdfs:label xml:lang="en">medication stop</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'medications.STOP' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the medication was discontinued (column medications.STOP). Nullable; an absent value may indicate an ongoing medication.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/STOP"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_hasPatients">
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'careplans.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a care plan to the patient it concerns. Derived from the foreign key careplans.PATIENT, which references patients.patient. The column is nullable. Each row holds at most one patient reference.</rdfs:comment>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/PATIENT"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:label xml:lang="en">careplans has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">care plan for patient</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#conditions_START">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Conditions"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'conditions.START' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the condition was first recorded or diagnosed (onset date). Source column conditions.START, datatype xsd:date. The column is nullable, and each condition has at most one start date.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions/START"/>
+    <rdfs:label xml:lang="en">START</rdfs:label>
+    <rdfs:label xml:lang="en">conditions START</rdfs:label>
+    <rdfs:label xml:lang="en">condition start date</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_ID">
+    <rdfs:label xml:lang="en">ID</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/ID"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'claims.ID' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Unique identifier of the claim. Derived from primary key column claims.ID (xsd:string, not null). Every claim has exactly one identifier.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#AllPrevalences">
+    <rdfs:subClassOf rdf:nodeID="Naf8991bf71d644bf98a8b13559e316a1"/>
+    <rdfs:subClassOf rdf:nodeID="Ne3f67f04cc2443ca8a1b3b5d65258db3"/>
+    <rdfs:subClassOf rdf:nodeID="Nd1f220cbbe634923acc980848c7dcd89"/>
+    <rdfs:subClassOf rdf:nodeID="N8f9ee60803d44369a55692e9df539702"/>
+    <rdfs:subClassOf rdf:nodeID="N2d4f588063044f48965bf4a26f591492"/>
+    <rdfs:subClassOf rdf:nodeID="Nad94badfe6bb4b1bad74f1560a71c622"/>
+    <rdfs:subClassOf rdf:nodeID="Nc89d657a266941fe8629339008c1db70"/>
+    <rdfs:subClassOf rdf:nodeID="N4c23e3aa007645558f5660fe778ae288"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#all_prevalences_POPULATION_TYPE_max_1_xsd_string"/>
+    <rdfs:subClassOf rdf:nodeID="Nb94fa1c0aca24f0abb7980fd4ca2c230"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#all_prevalences_PREVALENCE_RATE_max_1_xsd_double"/>
+    <rdfs:subClassOf rdf:nodeID="N51732a73f70141c0ade69737008d681d"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#all_prevalences_ITEM_max_1_xsd_string"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#all_prevalences_PREVALENCE_PERCENTAGE_max_1_xsd_double"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#all_prevalences_OCCURRENCES_max_1_xsd_integer"/>
+    <rdfs:subClassOf rdf:nodeID="N7ba2f847f2f04538874976abc6f0c773"/>
+    <rdfs:subClassOf rdf:nodeID="N7d50f376bfa14bee90cbe84ca0e4a752"/>
+    <rdfs:subClassOf rdf:nodeID="Nead7db54f02940ceadd42bc3336baea7"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#all_prevalences_POPULATION_COUNT_max_1_xsd_integer"/>
+    <rdfs:subClassOf rdf:nodeID="N5dcc76eeeb1a4421979eaf4768cbaa95"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences"/>
+    <owl:hasKey rdf:nodeID="Nd24a490ea4e34f27ab6d119188f51b09"/>
+    <owl:hasKey rdf:nodeID="N1d302382a5ed4074a2b33322e8eb878c"/>
+    <rdfs:label xml:lang="en">All Prevalences</rdfs:label>
+    <rdfs:label xml:lang="en">Prevalence Statistic Record</rdfs:label>
+    <rdfs:comment xml:lang="en">Class generated from source table 'all_prevalences'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A statistical record summarising the prevalence of a given item (for example a condition, diagnosis, medication or other clinical concept) within a population. Each record is identified by its ITEM value and reports the number of occurrences, the size of the reference population, the population type, and the derived prevalence rate and percentage. Generated from source table 'all_prevalences'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Class generated from source table 'all_prevalences'; referenced by conditions.DESCRIPTION.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N348314e4f933412a8ccf0d81cb061126">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_START"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Allergies">
+    <rdfs:subClassOf rdf:nodeID="N02327fa002b5464eaf7885f2b901e91e"/>
+    <rdfs:subClassOf rdf:nodeID="Nb7391fe42506442fbc600a6ecd0275e5"/>
+    <rdfs:subClassOf rdf:nodeID="N004b4295ecc24dcc8e6dde9b61654bcd"/>
+    <rdfs:subClassOf rdf:nodeID="N2ff15c2cee4d463ab6cb50185a9e9c0e"/>
+    <rdfs:subClassOf rdf:nodeID="N33c4e1815be24b52858d8e77bd7dd9bc"/>
+    <rdfs:subClassOf rdf:nodeID="N0519209f1ee74d65a59ad32757ff014d"/>
+    <rdfs:subClassOf rdf:nodeID="Necb081e3e3e140ff9edffbf5a62234f3"/>
+    <rdfs:subClassOf rdf:nodeID="N6b939b84fbd649dd9a85db24f1897891"/>
+    <rdfs:subClassOf rdf:nodeID="Nf8c0d1be07264e9389951942f87576e2"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Unnamed"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies"/>
+    <rdfs:label xml:lang="en">Allergies</rdfs:label>
+    <rdfs:comment xml:lang="en">Class generated from source table 'allergies'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">An allergy record documenting that a patient has an allergy or intolerance. The allergy was recorded during a clinical encounter and is identified by a clinical allergy code. Each record is uniquely identified by the combination of patient, encounter and allergy code, which is the composite primary key of the source table 'allergies'.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:hasKey rdf:nodeID="Nc4cc8af2877a45ba9a6e757955e30645"/>
+    <owl:disjointWith rdf:resource="http://example.org/ontology#Unnamed"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc4cc8af2877a45ba9a6e757955e30645">
+    <rdf:rest rdf:nodeID="N28a8b9515ea14c8cad37912899077d49"/>
+    <rdf:first rdf:resource="http://example.org/ontology#allergies_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_hasPatients">
+    <rdfs:label xml:lang="en">medications has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">medication for patient</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'medications.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a medication record to the patient for whom the medication was prescribed. Foreign key from medications.PATIENT to patients.patient. Not nullable; part of the composite primary key.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/PATIENT"/>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_STOP">
+    <rdfs:label xml:lang="en">STOP</rdfs:label>
+    <rdfs:label xml:lang="en">care plan stop date</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/STOP"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.STOP' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the care plan ended, from column careplans.STOP (xsd:date). The column is nullable. An absent value typically indicates a care plan that is still active.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_ID">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'encounters.ID' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Primary-key identifier of the encounter (column encounters.ID). The value is mandatory and unique per encounter. Datatype xsd:string.</rdfs:comment>
+    <rdfs:label xml:lang="en">ID</rdfs:label>
+    <rdfs:label xml:lang="en">encounter identifier</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb8d7e4f583924a47b28cea152677acdf">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasEncounters"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_CODE">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/CODE"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">medication code</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'medications.CODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Coded identifier of the medication (column medications.CODE). The integer is a nominal code from a clinical drug terminology (likely RxNorm), not an ordinal or quantitative value; arithmetic comparison is not meaningful. Its human-readable meaning is given by medications_DESCRIPTION. Not nullable; part of the composite primary key.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Patients">
+    <rdfs:subClassOf rdf:nodeID="Nc1ba15b0bd8e4b37ae0d46c28e32be74"/>
+    <rdfs:subClassOf rdf:nodeID="Nc962f4cf88794407bfa7876919f3c2af"/>
+    <rdfs:subClassOf rdf:nodeID="Nb7783bf81fbb4740b00a9f129a3261b5"/>
+    <rdfs:subClassOf rdf:nodeID="Nca931c876a43446db5c1c606ef084083"/>
+    <rdfs:subClassOf rdf:nodeID="Nd0aae4c5b1f54a099005ef4bb3b7589c"/>
+    <rdfs:subClassOf rdf:nodeID="N6e5091ecc085486fa252b361805dff9f"/>
+    <rdfs:subClassOf rdf:nodeID="Nff084c60ffe04a2b9b292a4895928736"/>
+    <rdfs:subClassOf rdf:nodeID="N5e19174b5d2b404a97b871ac559ce746"/>
+    <rdfs:subClassOf rdf:nodeID="Naef4c836b48d43a4bf2fefb01bb89d5f"/>
+    <rdfs:subClassOf rdf:nodeID="Nc97db08b980d445985e7acf24b8b551c"/>
+    <rdfs:subClassOf rdf:nodeID="N17b407d7a810492e96db37bfc41349c2"/>
+    <rdfs:subClassOf rdf:nodeID="N3b2a868a09cd4b0a84a9fb40f3476e9c"/>
+    <rdfs:subClassOf rdf:nodeID="Nfbd0d07a524c4b6a8bd4a7ee23051e65"/>
+    <rdfs:subClassOf rdf:nodeID="N94db88b20c6f4c01b7d0f2cb079737b6"/>
+    <rdfs:subClassOf rdf:nodeID="N57e2f47dcc5a4ca2911f2ae5492b2a2b"/>
+    <rdfs:subClassOf rdf:nodeID="N5ed3acba99de4d299a58ee4f15880578"/>
+    <rdfs:subClassOf rdf:nodeID="Nbd3861f5c33d406f908c84a44d1dd62d"/>
+    <rdfs:subClassOf rdf:nodeID="N407df59ef0514177a43a8c45d2e16923"/>
+    <rdfs:subClassOf rdf:nodeID="N81ee1a0ca12b4cf399a6b8913b9db206"/>
+    <rdfs:subClassOf rdf:nodeID="N0c87ae24a19d40e0ad44ccd68380c220"/>
+    <rdfs:subClassOf rdf:nodeID="Nc2644a3175af4ac994a9f5286f17f555"/>
+    <rdfs:subClassOf rdf:nodeID="N54d87de8bb4444e9afa1ef6a0a299d03"/>
+    <rdfs:subClassOf rdf:nodeID="Nb7367f1cca3d4b318c97d3d8652ec401"/>
+    <rdfs:subClassOf rdf:nodeID="N78efb6c48e504d34bb9daa60fdabdb3c"/>
+    <rdfs:subClassOf rdf:nodeID="N520d8bf4cd434a459a3e6864a419384e"/>
+    <rdfs:subClassOf rdf:nodeID="Nb3ad55c071ba4b5cb5d4ed1a61a1c5b3"/>
+    <rdfs:subClassOf rdf:nodeID="Nf8c0873349fe41b7845731249598edb2"/>
+    <rdfs:subClassOf rdf:nodeID="N3f05ef00d0be4141a2f50f99e13266d7"/>
+    <rdfs:subClassOf rdf:nodeID="N88ced41623b44d3fa1987f6249d61ed8"/>
+    <rdfs:subClassOf rdf:nodeID="Nf9b3f3ccd1f94a59b7aaa3b54a218ce1"/>
+    <rdfs:subClassOf rdf:nodeID="N5afa86e03aeb493b90337c6585c55256"/>
+    <rdfs:subClassOf rdf:nodeID="N9c87bc3c221b42c6b6565ba9407b0e3f"/>
+    <rdfs:subClassOf rdf:nodeID="Na3eaa0f3691c4ba784c9cd1129e22c92"/>
+    <rdfs:subClassOf rdf:nodeID="N0d77dd57f1ea4546afec27101ad94de7"/>
+    <rdfs:subClassOf rdf:nodeID="N00196e16fc084a4c925d6688d003df20"/>
+    <rdfs:subClassOf rdf:nodeID="Nfe13303c60b94534907fbb7747dc6dc6"/>
+    <rdfs:comment xml:lang="en">Class generated from source table 'patients'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A person who receives or has received healthcare services. Each instance corresponds to one row of the source table 'patients' and is uniquely identified by the patient identifier (primary key column patients.patient). The record holds demographic, identification, naming, and residence information.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A person receiving healthcare services. Instances correspond to rows of the source table 'patients'. This class is referenced by encounters.PATIENT.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A patient record from the source table 'patients', identified by the primary key column patients.patient.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Class generated from source table 'patients'; referenced by conditions.PATIENT.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A person receiving care. Each instance corresponds to a row of the source table 'patients'. It is referenced here as the target of the immunization-to-patient foreign key.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A person receiving care, derived from source table 'patients'. Referenced here as the target of the medications.PATIENT foreign key.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Class generated from source table 'patients'; a person who receives clinical care.</rdfs:comment>
+    <rdfs:label xml:lang="en">Patients</rdfs:label>
+    <rdfs:label xml:lang="en">Patient</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients"/>
+    <owl:hasKey rdf:nodeID="N63ff6063e80c4d53ac47156c30f5fa0c"/>
+    <owl:hasKey rdf:nodeID="N88f5bfc2bbdb422aad82ca06a239fc2e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb94fa1c0aca24f0abb7980fd4ca2c230">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_ITEM"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#allergies_hasEncounters">
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'allergies.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an allergy record to the clinical encounter during which the allergy was diagnosed or recorded. Derived from the foreign key allergies.ENCOUNTER, which references encounters.ID. The column is mandatory (NOT NULL) and is part of the composite primary key, so every allergy record refers to exactly one encounter.</rdfs:comment>
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies/ENCOUNTER"/>
+    <rdfs:label xml:lang="en">allergies has Encounters</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Allergies"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndf7ca53b9b244237906298fad8f7e956">
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_CODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_REASONCODE">
+    <rdfs:label xml:lang="en">REASONCODE</rdfs:label>
+    <rdfs:label xml:lang="en">medication reason code</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'medications.REASONCODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Coded clinical reason (e.g. diagnosis or condition) for which the medication was prescribed (column medications.REASONCODE). The integer is a nominal code from a clinical terminology (likely SNOMED CT), not an ordinal or quantitative value. Its human-readable meaning is given by medications_REASONDESCRIPTION. Nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/REASONCODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#all_prevalences_POPULATION_COUNT">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences/POPULATION%20COUNT"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#AllPrevalences"/>
+    <rdfs:label xml:lang="en">POPULATION COUNT</rdfs:label>
+    <rdfs:label xml:lang="en">population count</rdfs:label>
+    <rdfs:label xml:lang="en">all prevalences POPULATION COUNT</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'all_prevalences.POPULATION COUNT' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Total size of the reference population used as the denominator when computing prevalence. This is a quantitative count, not a categorical code. Optional. Source column all_prevalences.POPULATION COUNT; datatype xsd:integer.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_DATE">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'observations.DATE' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The calendar date on which the observation was recorded or performed. Source column observations.DATE has datatype xsd:date and is nullable.</rdfs:comment>
+    <rdfs:label xml:lang="en">DATE</rdfs:label>
+    <rdfs:label xml:lang="en">observations DATE</rdfs:label>
+    <rdfs:label xml:lang="en">observation date</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/DATE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Medications">
+    <rdfs:subClassOf rdf:nodeID="N2a0ab1ba85d144768047c7c6f0458963"/>
+    <rdfs:subClassOf rdf:nodeID="Nbe3ede98e754423db79d21cf161c0aa7"/>
+    <rdfs:subClassOf rdf:nodeID="N68f0511bdd8746be9dd08b4dd12692ff"/>
+    <rdfs:subClassOf rdf:nodeID="N7afbe8e7bc1547e68cece0dbf541f656"/>
+    <rdfs:subClassOf rdf:nodeID="N22b9ee8757154821b356fa10d05ac2b5"/>
+    <rdfs:subClassOf rdf:nodeID="N59971cbc009f44c4bf4eba829ff08dfa"/>
+    <rdfs:subClassOf rdf:nodeID="Nc56dac5709fe44f8921af5babc5bf374"/>
+    <rdfs:subClassOf rdf:nodeID="N348314e4f933412a8ccf0d81cb061126"/>
+    <rdfs:subClassOf rdf:nodeID="Nb4cfa406e0514232a139ae4724eded8e"/>
+    <rdfs:subClassOf rdf:nodeID="N0b26c3b392b5497b80b513030bd5c0a6"/>
+    <rdfs:subClassOf rdf:nodeID="Ne1a3a46a3af64cee96911dc9b9116cda"/>
+    <rdfs:subClassOf rdf:nodeID="N84bd3c1aa53f4aaeb60cce497881ece7"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Unnamed"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications"/>
+    <owl:hasKey rdf:nodeID="Ne53b58793de8466e8307aabb4b6da66f"/>
+    <rdfs:comment xml:lang="en">Class generated from source table 'medications'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A record of a medication prescribed to or taken by a patient, recorded in the context of a clinical encounter. Each record is identified by the composite primary key (START, PATIENT, ENCOUNTER, CODE). Derived from source table 'medications'.</rdfs:comment>
+    <rdfs:label xml:lang="en">Medications</rdfs:label>
+    <rdfs:label xml:lang="en">Medication record</rdfs:label>
+    <owl:disjointWith rdf:resource="http://example.org/ontology#Unnamed"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_REASONDESCRIPTION">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">REASONDESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">encounter reason description</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/REASONDESCRIPTION"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'encounters.REASONDESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the encounter reason that corresponds to encounters.REASONCODE (column encounters.REASONDESCRIPTION). Datatype xsd:string.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_BILLABLEPERIOD">
+    <rdfs:label xml:lang="en">BILLABLEPERIOD</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'claims.BILLABLEPERIOD' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date of the billable period covered by the claim. Derived from column claims.BILLABLEPERIOD (xsd:date, nullable).</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/BILLABLEPERIOD"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Observations">
+    <rdfs:subClassOf rdf:nodeID="Nd602a4d4a3eb4cbda0ccea4ca6bf3571"/>
+    <rdfs:subClassOf rdf:nodeID="Nd1a6e2caef43426397373f18f591a542"/>
+    <rdfs:subClassOf rdf:nodeID="N26db553cb8894e9e946b1ee4e8267736"/>
+    <rdfs:subClassOf rdf:nodeID="N4c372f3ae093482b91c08cfe32dd8fc8"/>
+    <rdfs:subClassOf rdf:nodeID="N0133039cb42e4af184c5dfa2af977562"/>
+    <rdfs:subClassOf rdf:nodeID="N37202dae244d45569b410aeb68ba32c3"/>
+    <rdfs:subClassOf rdf:nodeID="Nc28d777223544b249a7217b7ec06fb1c"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Unnamed"/>
+    <rdfs:label xml:lang="en">Observations</rdfs:label>
+    <rdfs:label xml:lang="en">Observation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="en">Class generated from source table 'observations'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical observation recorded for a patient, typically during an encounter. Examples include a vital sign, a laboratory result or a survey score. Each observation is identified by a clinical code with a textual description. It may carry a numeric value with units of measure. Derived from source table 'observations'. The table has no primary key and all columns are nullable.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations"/>
+    <owl:disjointWith rdf:resource="http://example.org/ontology#Unnamed"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88d3f4eaface42428a4a99623f291a59">
+    <rdf:rest rdf:nodeID="N931d81cdf52e416c82d495399a60c00d"/>
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_hasEncounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd602a4d4a3eb4cbda0ccea4ca6bf3571">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_VALUE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1f702d3c50c448618e5bfeee70e16608">
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_REASONCODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_hasEncounters">
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:label xml:lang="en">observations has Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">observation recorded in encounter</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/ENCOUNTER"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'observations.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an observation to the clinical encounter during which it was recorded. This is a foreign-key relationship from observations.ENCOUNTER to encounters.ID. The source column is nullable, so no existential restriction is asserted. Each row holds at most one encounter reference.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd4303e3e485344b486600d2e13f8ec28">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_CODE">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'observations.CODE' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical terminology code identifying the kind of observation. It is likely a LOINC-style code, and this is not confirmed by documentation. The code is stored as a string (xsd:string) because codes may contain non-numeric characters such as hyphens. Source column is observations.CODE and is nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/CODE"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">observations CODE</rdfs:label>
+    <rdfs:label xml:lang="en">observation code</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N81ee1a0ca12b4cf399a6b8913b9db206">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_ethnicity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0ff7f4ffeb24455eaf7a5ff5e714a9cd">
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_STOP"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_gender">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.gender' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Recorded gender of the patient. This is a categorical code stored as text, typically 'M' (male) or 'F' (female). Derived from column patients.gender (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:label xml:lang="en">gender</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/gender"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4df4fc5510ae4093948229184d54b4ea">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://example.org/ontology#encounters_ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N931d81cdf52e416c82d495399a60c00d">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_CODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6e5091ecc085486fa252b361805dff9f">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_first"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4310f44765fd4a8b86714a79b7b54e0a">
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0c87ae24a19d40e0ad44ccd68380c220">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_gender"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_REASONDESCRIPTION">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.REASONDESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the reason for the care plan, corresponding to careplans_REASONCODE. From column careplans.REASONDESCRIPTION (xsd:string).</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/REASONDESCRIPTION"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">REASONDESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">care plan reason description</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_CODE">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/CODE"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">procedure code</rdfs:label>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'procedures.CODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Numeric clinical terminology code identifying the type of procedure (likely a SNOMED CT concept identifier). This is a nominal identifier code, not an ordinal or quantitative value; its meaning is given by procedures.DESCRIPTION. Source column procedures.CODE; datatype xsd:integer; nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7dcdbc88bee14cdbb70c0e3401bc79e7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_REASONCODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_REASONCODE">
+    <rdfs:label xml:lang="en">REASONCODE</rdfs:label>
+    <rdfs:label xml:lang="en">encounter reason code</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'encounters.REASONCODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Coded reason for the encounter, such as a diagnosis or condition (column encounters.REASONCODE). The value is a nominal identifier from a clinical terminology, such as a SNOMED CT concept identifier. It is not an ordinal or quantitative value. Its human-readable meaning is given by encounters.REASONDESCRIPTION. The value is optional. Datatype xsd:integer.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/REASONCODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_passport">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/passport"/>
+    <rdfs:label xml:lang="en">passport</rdfs:label>
+    <rdfs:label xml:lang="en">passport number</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.passport' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Passport identifier of the patient. This is sensitive personal data. Derived from column patients.passport (nullable). Datatype: xsd:string.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N00196e16fc084a4c925d6688d003df20">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_first"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_START">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/START"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:label xml:lang="en">START</rdfs:label>
+    <rdfs:label xml:lang="en">care plan start date</rdfs:label>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.START' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the care plan began, from column careplans.START (xsd:date). The column is nullable.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9c87bc3c221b42c6b6565ba9407b0e3f">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_drivers"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N94db88b20c6f4c01b7d0f2cb079737b6">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_suffix"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6cd9edef78464d0e96b3be5f88422385">
+    <rdf:first rdf:resource="http://example.org/ontology#allergies_CODE"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb6822b6bb3f74f39a83538c9c801ad24">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_CODE"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd99219c6652e4b43b6482836a96da77e">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_DATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfe13303c60b94534907fbb7747dc6dc6">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_patient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na5bf326ad84746699913fe1b86522a8c">
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_ID"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_REASONCODE">
+    <rdfs:label xml:lang="en">REASONCODE</rdfs:label>
+    <rdfs:label xml:lang="en">procedure reason code</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/REASONCODE"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'procedures.REASONCODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Numeric clinical terminology code (likely a SNOMED CT concept identifier) for the condition or reason motivating the procedure. Nominal identifier code, not ordinal; its meaning is given by procedures.REASONDESCRIPTION. Analogous to encounters_REASONCODE and medications_REASONCODE. Source column procedures.REASONCODE; datatype xsd:integer; nullable.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#conditions_CODE">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions/CODE"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'conditions.CODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Clinical terminology code identifying the condition (likely a SNOMED CT concept identifier). Source column conditions.CODE, datatype xsd:integer. This is a nominal identifier, not an ordinal or quantitative value, so arithmetic or ordering on it is not meaningful. The human-readable term is given by the linked prevalence item (DESCRIPTION column).</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Conditions"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">condition code</rdfs:label>
+    <rdfs:label xml:lang="en">conditions CODE</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N17b407d7a810492e96db37bfc41349c2">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_prefix"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#conditions_hasAllPrevalences">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">conditions has All Prevalences</rdfs:label>
+    <rdfs:label xml:lang="en">condition has prevalence item</rdfs:label>
+    <rdfs:range rdf:resource="http://example.org/ontology#AllPrevalences"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Conditions"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions/DESCRIPTION"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'conditions.DESCRIPTION' referencing 'all_prevalences.ITEM'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a condition to the prevalence statistics entry whose ITEM matches the condition's textual description. Foreign-key relationship from conditions.DESCRIPTION to all_prevalences.ITEM. The DESCRIPTION column holds the human-readable condition name and is modeled only via this object property. The column is nullable, and each condition refers to at most one prevalence item.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf9b3f3ccd1f94a59b7aaa3b54a218ce1">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_prefix"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5afa86e03aeb493b90337c6585c55256">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_birthplace"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na03eb7a02ddb4286935a4214011d5d9d">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_CODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N752e3db5e08a41629e967f38ef0576a5">
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_hasEncounters"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc1ba15b0bd8e4b37ae0d46c28e32be74">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_race"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd0aae4c5b1f54a099005ef4bb3b7589c">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_ssn"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#allergies_STOP">
+    <rdfs:label xml:lang="en">STOP</rdfs:label>
+    <rdfs:label xml:lang="en">allergies STOP</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies/STOP"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'allergies.STOP' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The date on which the allergy was resolved or ceased to be active, from column allergies.STOP. The source schema types this column as a string, so the range is xsd:string to stay consistent with the direct mapping; values are expected in a date format and should be retyped to xsd:date upstream. The value is optional; if it is absent, the allergy may still be active.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Allergies"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#allergies_DESCRIPTION">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Allergies"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'allergies.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A human-readable description of the allergy that corresponds to the code in allergies_CODE, from column allergies.DESCRIPTION. The value is optional (nullable).</rdfs:comment>
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">allergies DESCRIPTION</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies/DESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_hasPatients">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:label xml:lang="en">encounters has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">encounter has patient</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/PATIENT"/>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'encounters.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an encounter to the patient who took part in it. This property is derived from the foreign key encounters.PATIENT, which references patients.patient. Each encounter row refers to at most one patient.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2d4f588063044f48965bf4a26f591492">
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_PREVALENCE_PERCENTAGE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#all_prevalences_PREVALENCE_PERCENTAGE">
+    <rdfs:label xml:lang="en">PREVALENCE PERCENTAGE</rdfs:label>
+    <rdfs:label xml:lang="en">prevalence percentage</rdfs:label>
+    <rdfs:label xml:lang="en">all prevalences PREVALENCE PERCENTAGE</rdfs:label>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'all_prevalences.PREVALENCE PERCENTAGE' with range xsd:double.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Prevalence expressed as a percentage, typically PREVALENCE RATE multiplied by 100 (expected range 0 to 100). Optional. Source column all_prevalences.PREVALENCE PERCENTAGE; datatype xsd:double.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#AllPrevalences"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/all_prevalences/PREVALENCE%20PERCENTAGE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_maiden">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">maiden</rdfs:label>
+    <rdfs:label xml:lang="en">maiden name</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.maiden' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Family name of the patient before marriage, where applicable. Derived from column patients.maiden (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/maiden"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Immunizations">
+    <rdfs:subClassOf rdf:nodeID="N35c2e30a66694fe8974ccf3f2e2f1e89"/>
+    <rdfs:subClassOf rdf:nodeID="Nb6822b6bb3f74f39a83538c9c801ad24"/>
+    <rdfs:subClassOf rdf:nodeID="N28cd57441a534a179274e5291f6fb7c6"/>
+    <rdfs:subClassOf rdf:nodeID="N1655a07bba41482dbc1d26543e0df447"/>
+    <rdfs:subClassOf rdf:nodeID="Nb8d7e4f583924a47b28cea152677acdf"/>
+    <rdfs:subClassOf rdf:nodeID="Ned4765e0b27c4fb2a5fe876b9a815c82"/>
+    <rdfs:subClassOf rdf:nodeID="N449e1b104f404377b773897086413892"/>
+    <rdfs:subClassOf rdf:nodeID="Nd4303e3e485344b486600d2e13f8ec28"/>
+    <rdfs:subClassOf rdf:nodeID="N3ec73157fdb24803a13e254086f30951"/>
+    <rdfs:subClassOf rdf:nodeID="N24c02b48471f4d46b1f880dab9a45eb5"/>
+    <rdfs:subClassOf rdf:nodeID="N623af772a309403d8139193969e1e03e"/>
+    <rdfs:subClassOf rdf:nodeID="N022f12805868417c99bce2ac707abed2"/>
+    <rdfs:subClassOf rdf:nodeID="N6865ee97dc6f4712aac9a79332326599"/>
+    <rdfs:subClassOf rdf:nodeID="N5f5784b9d55045bd813517499e284845"/>
+    <rdfs:subClassOf rdf:nodeID="N3e9fdf9b8dfb4431a923e52dfc8f4a08"/>
+    <rdfs:subClassOf rdf:nodeID="N4bb09bed2f58416c99e14d93ea67a2be"/>
+    <rdfs:subClassOf rdf:nodeID="N4310f44765fd4a8b86714a79b7b54e0a"/>
+    <rdfs:subClassOf rdf:nodeID="Nadfcc3a9be5e411cbdf457f2eada1e51"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Immunizations</rdfs:label>
+    <rdfs:label xml:lang="en">Immunization</rdfs:label>
+    <rdfs:comment xml:lang="en">Class generated from source table 'immunizations'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A record of a vaccine administered to a patient on a given date during a clinical encounter. Each instance corresponds to one row of the source table 'immunizations'. A record is identified by the composite primary key (DATE, PATIENT, ENCOUNTER, CODE).</rdfs:comment>
+    <owl:hasKey rdf:nodeID="N5a1cfa78d20b49d3914bb3c61b779396"/>
+    <owl:hasKey rdf:nodeID="Nfe4721be214143a181609d09a30fc29d"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/immunizations"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_DIAGNOSIS">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'claims.DIAGNOSIS' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Diagnosis code or description justifying the claimed services. Derived from column claims.DIAGNOSIS (xsd:string, nullable).</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/DIAGNOSIS"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">DIAGNOSIS</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Conditions">
+    <rdfs:label xml:lang="en">Conditions</rdfs:label>
+    <rdfs:label xml:lang="en">Condition</rdfs:label>
+    <rdfs:subClassOf rdf:nodeID="N62f61c6fd76943a0b41b37332b326865"/>
+    <rdfs:subClassOf rdf:nodeID="N14d4cb9cb288421991dc4ebcdaab9b26"/>
+    <rdfs:subClassOf rdf:nodeID="N236cd1a6d92d42bc89d722c9e5613618"/>
+    <rdfs:subClassOf rdf:nodeID="N9e8a7c60eb1846cfb3c837ac3ff13487"/>
+    <rdfs:subClassOf rdf:nodeID="N5fcdd58fa0e644439fa4f0e3cca547a2"/>
+    <rdfs:subClassOf rdf:nodeID="Nc34255506b754b3880a0a4bf4a325971"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Unnamed"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:comment xml:lang="en">Class generated from source table 'conditions'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical condition (diagnosis or health problem) recorded for a patient, optionally in the context of a specific encounter. It has an onset (START) date and an optional resolution (STOP) date. Each record corresponds to one row of the source table 'conditions'.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_START">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/START"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">START</rdfs:label>
+    <rdfs:label xml:lang="en">medication start</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'medications.START' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Start date of the medication record (column medications.START). Stored as xsd:string in the source, although it semantically represents a date. Not nullable; part of the composite primary key.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_DESCRIPTION">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/DESCRIPTION"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'medications.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the medication identified by medications_CODE (column medications.DESCRIPTION). Nullable.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">medication description</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#immunizations_CODE">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'immunizations.CODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Coded identifier of the vaccine administered. Source column immunizations.CODE (xsd:integer). This column is not null and is part of the composite primary key. The integer is a nominal categorical code drawn from a vaccine coding system (e.g. a CVX-style code). It has no ordinal or arithmetic meaning. The human-readable meaning is given by immunizations_DESCRIPTION.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/immunizations/CODE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">immunization vaccine code</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Immunizations"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb00d811b17f442b48db2aa7582ae3fed">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_CODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_deathdate">
+    <rdfs:label xml:lang="en">deathdate</rdfs:label>
+    <rdfs:label xml:lang="en">death date</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/deathdate"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.deathdate' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the patient died. Derived from column patients.deathdate. The column is nullable, and an absent value typically indicates that the patient is living or that the date of death is unknown. Datatype: xsd:date.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_hasPatients">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/PATIENT"/>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'procedures.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a procedure to the patient on whom it was performed. Foreign-key relationship from procedures.PATIENT to patients.patient; nullable.</rdfs:comment>
+    <rdfs:label xml:lang="en">procedures has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">procedure performed on patient</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_ID">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">ID</rdfs:label>
+    <rdfs:label xml:lang="en">care plan identifier</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.ID' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Source identifier of the care plan, from column careplans.ID (xsd:string). The column is nullable and not declared unique or primary key, so no existential or key restriction is asserted.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne73197fbb7b749e2af9c3e02b69125b2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_REASONDESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_marital">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/marital"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">marital</rdfs:label>
+    <rdfs:label xml:lang="en">marital status</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.marital' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Marital status of the patient. This is a categorical code stored as text, typically single-letter codes such as 'M' (married) or 'S' (single); other codes may occur. Derived from column patients.marital (nullable). Datatype: xsd:string.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3ec73157fdb24803a13e254086f30951">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_DATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd24a490ea4e34f27ab6d119188f51b09">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://example.org/ontology#all_prevalences_ITEM"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N61b915a3a5f14fc2b0351d88232b3a74">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb4cfa406e0514232a139ae4724eded8e">
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0133039cb42e4af184c5dfa2af977562">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_UNITS"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#conditions_hasPatients">
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Conditions"/>
+    <rdfs:label xml:lang="en">conditions has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">condition of patient</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions/PATIENT"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'conditions.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a condition to the patient who has it. Foreign-key relationship from conditions.PATIENT to patients.patient. The column is nullable, and each condition refers to at most one patient.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_REASONCODE">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.REASONCODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Clinical terminology code for the condition or reason motivating the care plan, likely a SNOMED CT concept identifier. From column careplans.REASONCODE (xsd:integer). This is a categorical (nominal) code, not an ordinal or quantitative value. The human-readable meaning is given by careplans_REASONDESCRIPTION. The column is nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/REASONCODE"/>
+    <rdfs:label xml:lang="en">REASONCODE</rdfs:label>
+    <rdfs:label xml:lang="en">care plan reason code</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb7783bf81fbb4740b00a9f129a3261b5">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_birthdate"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_race">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.race' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Self-reported or recorded race of the patient. This is a categorical text value, for example 'white', 'black', 'asian', 'native', or 'other'. Derived from column patients.race (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/race"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">race</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N389a1a72f32c41cbbc60a1391361ee6f">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_CODE">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/CODE"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'encounters.CODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Coded classification of the encounter type (column encounters.CODE). The value is a nominal identifier from a clinical terminology, such as a SNOMED CT concept identifier. It is not an ordinal or quantitative value, so arithmetic or ordering comparisons are not meaningful. Its human-readable meaning is given by encounters.DESCRIPTION. Datatype xsd:integer.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">encounter type code</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#conditions_hasEncounters">
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:label xml:lang="en">conditions has Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">condition recorded during encounter</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions/ENCOUNTER"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'conditions.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a condition to the clinical encounter during which it was diagnosed or recorded. Foreign-key relationship from conditions.ENCOUNTER to encounters.ID. The column is nullable, and each condition refers to at most one encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Conditions"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_DESCRIPTION">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'observations.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the observation type associated with the observation code. Source column observations.DESCRIPTION has datatype xsd:string and is nullable.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/DESCRIPTION"/>
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">observations DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">observation description</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#allergies_START">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Allergies"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'allergies.START' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The date on which the allergy was first observed or became active, from column allergies.START. The source schema types this column as a string, so the range is xsd:string to stay consistent with the direct mapping; values are expected in a date format and should be retyped to xsd:date upstream. The value is optional (nullable).</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies/START"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">START</rdfs:label>
+    <rdfs:label xml:lang="en">allergies START</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#Claims">
+    <rdfs:subClassOf rdf:nodeID="N9cb7117a82c94415a96c21b52d8221b3"/>
+    <rdfs:subClassOf rdf:nodeID="Nb2b78bae08d4431f91bb0ab871350678"/>
+    <rdfs:subClassOf rdf:nodeID="Nfff819a5872e4652aa614f9ba5f96cfe"/>
+    <rdfs:subClassOf rdf:nodeID="N752e3db5e08a41629e967f38ef0576a5"/>
+    <rdfs:subClassOf rdf:nodeID="N0e077568764c403f8e743907d425e846"/>
+    <rdfs:subClassOf rdf:nodeID="N6ac87313dc9a45b08a7c5b58c11f43cb"/>
+    <rdfs:subClassOf rdf:nodeID="N0f1507be41b94a7a8655fddcceb8dfd8"/>
+    <rdfs:subClassOf rdf:nodeID="Nca3a7f02379a45ec92b9e7269a2850d2"/>
+    <rdfs:subClassOf rdf:resource="http://example.org/ontology#Unnamed"/>
+    <rdfs:label xml:lang="en">Claims</rdfs:label>
+    <rdfs:comment xml:lang="en">Class generated from source table 'claims'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A healthcare billing claim submitted for services rendered to a patient, optionally associated with a clinical encounter. Each instance corresponds to one row of source table 'claims', identified by the primary key column ID.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims"/>
+    <owl:hasKey rdf:nodeID="N5014b12ec392401fbbad3a5d42f32413"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:disjointWith rdf:resource="http://example.org/ontology#Unnamed"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naf8991bf71d644bf98a8b13559e316a1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_POPULATION_TYPE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ned4765e0b27c4fb2a5fe876b9a815c82">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasPatients"/>
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_birthplace">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/birthplace"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.birthplace' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Place where the patient was born, given as free text such as a city and region. Derived from column patients.birthplace (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">birthplace</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc34255506b754b3880a0a4bf4a325971">
+    <owl:onProperty rdf:resource="http://example.org/ontology#conditions_hasAllPrevalences"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#AllPrevalences"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N74c4843949aa421cac71edb2a9e4011a">
+    <rdf:rest rdf:nodeID="Ned83205016e848f3b0febff9b21d711f"/>
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb7367f1cca3d4b318c97d3d8652ec401">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_race"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_drivers">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.drivers' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Driver's license identifier of the patient. This is sensitive personal data. Derived from column patients.drivers (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:label xml:lang="en">drivers</rdfs:label>
+    <rdfs:label xml:lang="en">driver's license number</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/drivers"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N145fa3aff0d14b8a90489ed821837202">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N22b9ee8757154821b356fa10d05ac2b5">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_CODE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_hasEncounters">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/ENCOUNTER"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'medications.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a medication record to the clinical encounter during which it was prescribed or recorded. Foreign key from medications.ENCOUNTER to encounters.ID. Not nullable; part of the composite primary key.</rdfs:comment>
+    <rdfs:label xml:lang="en">medications has Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">medication in encounter</rdfs:label>
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N26db553cb8894e9e946b1ee4e8267736">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_DATE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_patient">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.patient' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Unique identifier of the patient record. Derived from the primary key column patients.patient (not null). It serves as the key of the Patients class. Datatype: xsd:string.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">patient</rdfs:label>
+    <rdfs:label xml:lang="en">patient identifier</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/patient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2a0ab1ba85d144768047c7c6f0458963">
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0e077568764c403f8e743907d425e846">
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_TOTAL"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naef4c836b48d43a4bf2fefb01bb89d5f">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_marital"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nded0d8e6775448399b64a2821139b474">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N57e2f47dcc5a4ca2911f2ae5492b2a2b">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_gender"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N63ff6063e80c4d53ac47156c30f5fa0c">
+    <rdf:first rdf:resource="http://example.org/ontology#patients_patient"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5fcdd58fa0e644439fa4f0e3cca547a2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#conditions_hasPatients"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na3eaa0f3691c4ba784c9cd1129e22c92">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_ssn"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0519209f1ee74d65a59ad32757ff014d">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_ethnicity">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.ethnicity' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Recorded ethnicity or ethnic heritage of the patient. This is a categorical text value. Derived from column patients.ethnicity (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/ethnicity"/>
+    <rdfs:label xml:lang="en">ethnicity</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_hasEncounters">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'careplans.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a care plan to the clinical encounter in which it was established. Derived from the foreign key careplans.ENCOUNTER, which references encounters.ID. The column is nullable. Each row holds at most one encounter reference.</rdfs:comment>
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:label xml:lang="en">careplans has Encounters</rdfs:label>
+    <rdfs:label xml:lang="en">care plan initiated in encounter</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/ENCOUNTER"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_DESCRIPTION">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/DESCRIPTION"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'encounters.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the encounter type that corresponds to encounters.CODE (column encounters.DESCRIPTION). Datatype xsd:string.</rdfs:comment>
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">encounter type description</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8f9ee60803d44369a55692e9df539702">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_ITEM"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5ed3acba99de4d299a58ee4f15880578">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_last"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#careplans_CODE">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/careplans/CODE"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Careplans"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'careplans.CODE' with range xsd:double.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Clinical terminology code identifying the type of care plan, likely a SNOMED CT concept identifier. From column careplans.CODE, stored as xsd:double. Values are nominal identifiers, not quantities or ordinal levels. They should not be used in arithmetic or ordering. The human-readable meaning is given by careplans_DESCRIPTION.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">care plan code</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N78efb6c48e504d34bb9daa60fdabdb3c">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_birthdate"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb7391fe42506442fbc600a6ecd0275e5">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_STOP"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_last">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">last</rdfs:label>
+    <rdfs:label xml:lang="en">last name</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/last"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.last' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Family (last) name of the patient. Derived from column patients.last (nullable). Datatype: xsd:string.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N623af772a309403d8139193969e1e03e">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_DESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_TOTAL">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/TOTAL"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+    <rdfs:label xml:lang="en">TOTAL</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'claims.TOTAL' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Total monetary amount billed in the claim. Derived from column claims.TOTAL (xsd:integer, nullable). This is a quantitative amount, not a categorical or ordinal encoding; the currency unit is not specified in the source.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N14d4cb9cb288421991dc4ebcdaab9b26">
+    <owl:onProperty rdf:resource="http://example.org/ontology#conditions_STOP"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_suffix">
+    <rdfs:label xml:lang="en">suffix</rdfs:label>
+    <rdfs:label xml:lang="en">name suffix</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/suffix"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.suffix' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Suffix following the patient's name, for example Jr., Sr., PhD, or MD. This is a categorical text value. Derived from column patients.suffix (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0f1507be41b94a7a8655fddcceb8dfd8">
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_ORGANIZATION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N449e1b104f404377b773897086413892">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasPatients"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#allergies_CODE">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Allergies"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'allergies.CODE' with range xsd:integer.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A clinical terminology code that identifies the allergy type, from column allergies.CODE. In Synthea-style data this is typically a SNOMED CT concept identifier. It is a nominal identifier, not an ordinal or quantitative value, so arithmetic or ordering on it has no meaning. The value is mandatory and is part of the composite primary key. Its human-readable meaning is given by allergies_DESCRIPTION.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/allergies/CODE"/>
+    <rdfs:label xml:lang="en">CODE</rdfs:label>
+    <rdfs:label xml:lang="en">allergies CODE</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N35c2e30a66694fe8974ccf3f2e2f1e89">
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_REASONDESCRIPTION">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <rdfs:label xml:lang="en">REASONDESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">procedure reason description</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/REASONDESCRIPTION"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'procedures.REASONDESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the reason for the procedure, corresponding to procedures.REASONCODE. Source column procedures.REASONDESCRIPTION; datatype xsd:string; nullable.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N236cd1a6d92d42bc89d722c9e5613618">
+    <owl:onProperty rdf:resource="http://example.org/ontology#conditions_hasEncounters"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6ac87313dc9a45b08a7c5b58c11f43cb">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N62f61c6fd76943a0b41b37332b326865">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#conditions_CODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb2b78bae08d4431f91bb0ab871350678">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7afbe8e7bc1547e68cece0dbf541f656">
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_REASONCODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc2644a3175af4ac994a9f5286f17f555">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_marital"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7e2ea2ea13e34cba81f738c27087d497">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_hasPatients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_hasPatients">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/PATIENT"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'observations.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an observation to the patient it was recorded for. This is a foreign-key relationship from observations.PATIENT to patients.patient. The source column is nullable, so no existential restriction is asserted. Each row holds at most one patient reference.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+    <rdfs:label xml:lang="en">observations has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">observation of patient</rdfs:label>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N10dc293ccea14c9d99b78c457bd13532">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_CODE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88f5bfc2bbdb422aad82ca06a239fc2e">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://example.org/ontology#patients_patient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfff819a5872e4652aa614f9ba5f96cfe">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_BILLABLEPERIOD"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_hasEncounters">
+    <rdfs:label xml:lang="en">claims has Encounters</rdfs:label>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/ENCOUNTER"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'claims.ENCOUNTER' referencing 'encounters.ID'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a claim to the clinical encounter during which the billed services were rendered. Derived from foreign key claims.ENCOUNTER referencing encounters.ID. Nullable in source, so no existential restriction is asserted; at most one encounter per claim.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#observations_VALUE">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'observations.VALUE' with range xsd:double.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The numeric result of the observation. It should be interpreted together with the units given by observations_UNITS. Source column observations.VALUE has datatype xsd:double and is nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Observations"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/observations/VALUE"/>
+    <rdfs:label xml:lang="en">VALUE</rdfs:label>
+    <rdfs:label xml:lang="en">observations VALUE</rdfs:label>
+    <rdfs:label xml:lang="en">observation value</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88ced41623b44d3fa1987f6249d61ed8">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_maiden"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9cb7117a82c94415a96c21b52d8221b3">
+    <owl:onProperty rdf:resource="http://example.org/ontology#claims_DIAGNOSIS"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_birthdate">
+    <rdfs:label xml:lang="en">birthdate</rdfs:label>
+    <rdfs:label xml:lang="en">birth date</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/birthdate"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.birthdate' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the patient was born. Derived from column patients.birthdate (nullable). Datatype: xsd:date.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfbd0d07a524c4b6a8bd4a7ee23051e65">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_passport"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N51732a73f70141c0ade69737008d681d">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_PREVALENCE_RATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#immunizations_DATE">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/immunizations/DATE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Immunizations"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'immunizations.DATE' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The calendar date on which the vaccine was administered. Source column immunizations.DATE (xsd:date). This column is not null and is part of the composite primary key.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">DATE</rdfs:label>
+    <rdfs:label xml:lang="en">immunization date</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb3ad55c071ba4b5cb5d4ed1a61a1c5b3">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_patient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne1d7f8d3b7804a2ea18c2caf4eb585d7">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_REASONDESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc962f4cf88794407bfa7876919f3c2af">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_drivers"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndd5a7d0ecf6e40a6964bcdfc6bacc16e">
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc8e29c64df6c4ff3a2690cd05a60223a">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_STOP"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nad94badfe6bb4b1bad74f1560a71c622">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_OCCURRENCES"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6865ee97dc6f4712aac9a79332326599">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_CODE"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne3f67f04cc2443ca8a1b3b5d65258db3">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_PREVALENCE_RATE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne1a3a46a3af64cee96911dc9b9116cda">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7cfabb38c09346fd9075c9fb898243fd">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_DATE"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N593a06ff28a1436cbf6b89143fc9154d">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nae361557a783465aacab7e5ea3cbcdc6">
+    <rdf:first rdf:resource="http://example.org/ontology#medications_CODE"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#conditions_STOP">
+    <rdfs:comment xml:lang="en">Data property generated from source column 'conditions.STOP' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Date on which the condition was resolved or ended. Source column conditions.STOP, datatype xsd:date. The column is nullable. An absent value typically indicates an ongoing or chronic condition. Each condition has at most one stop date.</rdfs:comment>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/conditions/STOP"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">STOP</rdfs:label>
+    <rdfs:label xml:lang="en">conditions STOP</rdfs:label>
+    <rdfs:label xml:lang="en">condition stop date</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Conditions"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nef38cc4cc3d04a03b939d42e0958b159">
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_ID"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc28d777223544b249a7217b7ec06fb1c">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0d77dd57f1ea4546afec27101ad94de7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_address"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4c372f3ae093482b91c08cfe32dd8fc8">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_hasEncounters"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbe3ede98e754423db79d21cf161c0aa7">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Necb081e3e3e140ff9edffbf5a62234f3">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_hasEncounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc98c037a5dc94d8786c33bc7e1a76029">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_hasEncounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N28cd57441a534a179274e5291f6fb7c6">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_CODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_hasPatients">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/PATIENT"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'claims.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links a claim to the patient for whom the billed services were provided. Derived from foreign key claims.PATIENT referencing patients.patient. Nullable in source, so no existential restriction is asserted; at most one patient per claim.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:label xml:lang="en">claims has Patients</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne53b58793de8466e8307aabb4b6da66f">
+    <rdf:first rdf:resource="http://example.org/ontology#medications_START"/>
+    <rdf:rest rdf:nodeID="N8b368b6198124c76a14453f3ac1c1439"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5c7f2566dc8c4fc6a901e9b723f888af">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_REASONCODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7ba2f847f2f04538874976abc6f0c773">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_POPULATION_COUNT"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4c23e3aa007645558f5660fe778ae288">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_PREVALENCE_PERCENTAGE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nff084c60ffe04a2b9b292a4895928736">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_maiden"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N468ebde8bad74c0bb717db6769b4c75f">
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_REASONDESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc199026db93840d98e3f6633bc253727">
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_ID"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nad7a058cd7c243169a08dc82e51bb7e0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N26248f84d8b8471184a6f397d958fa78">
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_hasPatients"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#immunizations_hasPatients">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">immunizations has Patients</rdfs:label>
+    <rdfs:label xml:lang="en">immunization of patient</rdfs:label>
+    <rdfs:range rdf:resource="http://example.org/ontology#Patients"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/immunizations/PATIENT"/>
+    <rdfs:comment xml:lang="en">Object property generated from foreign key 'immunizations.PATIENT' referencing 'patients.patient'.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Links an immunization record to the patient who received the vaccine. This is the foreign key immunizations.PATIENT referencing patients.patient. The column is not null and is part of the composite primary key.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Immunizations"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5014b12ec392401fbbad3a5d42f32413">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://example.org/ontology#claims_ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_address">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">address</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.address' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Residential address of the patient, given as free text. This is sensitive personal data. Derived from column patients.address (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/address"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#immunizations_DESCRIPTION">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/immunizations/DESCRIPTION"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'immunizations.DESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the administered vaccine, corresponding to the categorical code in immunizations_CODE. Source column immunizations.DESCRIPTION (xsd:string). This column is nullable.</rdfs:comment>
+    <rdfs:label xml:lang="en">DESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">immunization vaccine description</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Immunizations"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc89d657a266941fe8629339008c1db70">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_POPULATION_COUNT"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#procedures_DATE">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'procedures.DATE' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The date on which the procedure was performed. Source column procedures.DATE; datatype xsd:date; nullable.</rdfs:comment>
+    <rdfs:label xml:lang="en">DATE</rdfs:label>
+    <rdfs:label xml:lang="en">procedure date</rdfs:label>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Procedures"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/procedures/DATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N54d87de8bb4444e9afa1ef6a0a299d03">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_last"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N68f0511bdd8746be9dd08b4dd12692ff">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_REASONDESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2ff15c2cee4d463ab6cb50185a9e9c0e">
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_CODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#medications_REASONDESCRIPTION">
+    <rdfs:label xml:lang="en">REASONDESCRIPTION</rdfs:label>
+    <rdfs:label xml:lang="en">medication reason description</rdfs:label>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'medications.REASONDESCRIPTION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Human-readable description of the clinical reason identified by medications_REASONCODE (column medications.REASONDESCRIPTION). Nullable.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Medications"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/medications/REASONDESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc97db08b980d445985e7acf24b8b551c">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_ethnicity"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfe28e4015cad47048e7255df5892e280">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_ID"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N07842959e51d47e7a4e6e680bd6f5f81">
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4f2927e03a6640c4afe3e3c57037fb36">
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_CODE"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02327fa002b5464eaf7885f2b901e91e">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Encounters"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_hasEncounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <prov:generatedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-10-20T02:06:36.354710+00:00</prov:generatedAtTime>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd1f220cbbe634923acc980848c7dcd89">
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_ITEM"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6b939b84fbd649dd9a85db24f1897891">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_START"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N59971cbc009f44c4bf4eba829ff08dfa">
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_CODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1c4ac18b142d401a8ea0a1e35d1309b5">
+    <rdf:first rdf:resource="http://example.org/ontology#encounters_ID"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5dcc76eeeb1a4421979eaf4768cbaa95">
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_ITEM"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nca931c876a43446db5c1c606ef084083">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_deathdate"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndaaa57c23a1d441581b8b0b9f763f898">
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_DATE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndd20783a3ced4af7b848eb6c56ee52a4">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_ID"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf8c0d1be07264e9389951942f87576e2">
+    <owl:someValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd1a6e2caef43426397373f18f591a542">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#observations_DESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N27122ae6d50142ed9c0b99ec09887774">
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_DESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#patients_first">
+    <rdfs:domain rdf:resource="http://example.org/ontology#Patients"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/patients/first"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'patients.first' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Given (first) name of the patient. Derived from column patients.first (nullable). Datatype: xsd:string.</rdfs:comment>
+    <rdfs:label xml:lang="en">first</rdfs:label>
+    <rdfs:label xml:lang="en">first name</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#encounters_DATE">
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/encounters/DATE"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Encounters"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'encounters.DATE' with range xsd:date.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Calendar date on which the encounter took place (column encounters.DATE). The value is optional. Datatype xsd:date.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:label xml:lang="en">DATE</rdfs:label>
+    <rdfs:label xml:lang="en">encounter date</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N88cc98fb820f44af911af3413b631cc2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_REASONDESCRIPTION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N520d8bf4cd434a459a3e6864a419384e">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_suffix"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbd3861f5c33d406f908c84a44d1dd62d">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_birthplace"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N835f0bc9e73a47af866c278e232eab21">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_START"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfe4721be214143a181609d09a30fc29d">
+    <rdf:rest rdf:nodeID="N74c4843949aa421cac71edb2a9e4011a"/>
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_DATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N004b4295ecc24dcc8e6dde9b61654bcd">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_hasPatients"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nde025ede16774c2189e5e10657a363d9">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_ID"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7d50f376bfa14bee90cbe84ca0e4a752">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#all_prevalences_OCCURRENCES"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3f05ef00d0be4141a2f50f99e13266d7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_passport"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N407df59ef0514177a43a8c45d2e16923">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_address"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N964abd7c09614d129e4b8e8f66356dc8">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_START"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3e9fdf9b8dfb4431a923e52dfc8f4a08">
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_DATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N28a8b9515ea14c8cad37912899077d49">
+    <rdf:first rdf:resource="http://example.org/ontology#allergies_hasEncounters"/>
+    <rdf:rest rdf:nodeID="N6cd9edef78464d0e96b3be5f88422385"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5e19174b5d2b404a97b871ac559ce746">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_patient"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5f5784b9d55045bd813517499e284845">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_CODE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4bb09bed2f58416c99e14d93ea67a2be">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_hasPatients"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://example.org/ontology#Patients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3af36bb9b2f2425a945b8b56b78b4f1c">
+    <owl:onProperty rdf:resource="http://example.org/ontology#procedures_REASONDESCRIPTION"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd41da3be25bb4663a5d353b64ca5c337">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_CODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/ontology#claims_ORGANIZATION">
+    <rdfs:label xml:lang="en">ORGANIZATION</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Data property generated from source column 'claims.ORGANIZATION' with range xsd:string.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Identifier or name of the healthcare organization submitting or responsible for the claim. Derived from column claims.ORGANIZATION (xsd:string, nullable). No foreign key is declared in the source schema, so it is kept as a literal value.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://example.org/ontology#Claims"/>
+    <prov:wasDerivedFrom rdf:resource="http://example.org/ontology/provenance/claims/ORGANIZATION"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N630592d90c2d41ad878d252be1ec1797">
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_hasPatients"/>
+    <rdf:rest rdf:nodeID="N88d3f4eaface42428a4a99623f291a59"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3b2a868a09cd4b0a84a9fb40f3476e9c">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_patient"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf8c0873349fe41b7845731249598edb2">
+    <owl:onProperty rdf:resource="http://example.org/ontology#patients_deathdate"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N09f2dcadf8a840848c87a9cfe265c17a">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#encounters_REASONCODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5a1cfa78d20b49d3914bb3c61b779396">
+    <rdf:rest rdf:nodeID="N630592d90c2d41ad878d252be1ec1797"/>
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_DATE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N317bf524870246bf8ac57ffec310e923">
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#careplans_REASONCODE"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nadfcc3a9be5e411cbdf457f2eada1e51">
+    <owl:onProperty rdf:resource="http://example.org/ontology#immunizations_DATE"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1d302382a5ed4074a2b33322e8eb878c">
+    <rdf:first rdf:resource="http://example.org/ontology#all_prevalences_ITEM"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N33c4e1815be24b52858d8e77bd7dd9bc">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#allergies_CODE"/>
+    <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8b368b6198124c76a14453f3ac1c1439">
+    <rdf:rest rdf:nodeID="N76a2dfa739ec4951a478c7971b97cb2a"/>
+    <rdf:first rdf:resource="http://example.org/ontology#medications_hasPatients"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N76a2dfa739ec4951a478c7971b97cb2a">
+    <rdf:rest rdf:nodeID="Nae361557a783465aacab7e5ea3cbcdc6"/>
+    <rdf:first rdf:resource="http://example.org/ontology#medications_hasEncounters"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N84bd3c1aa53f4aaeb60cce497881ece7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+    <owl:onProperty rdf:resource="http://example.org/ontology#medications_STOP"/>
+    <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ned83205016e848f3b0febff9b21d711f">
+    <rdf:rest rdf:nodeID="N4f2927e03a6640c4afe3e3c57037fb36"/>
+    <rdf:first rdf:resource="http://example.org/ontology#immunizations_hasEncounters"/>
+  </rdf:Description>
+</rdf:RDF>

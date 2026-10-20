@@ -1,0 +1,243 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://example.org/ontology#> .
+@prefix map: <http://example.org/movie_3/mapping#> .
+
+map:TM_actor a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "actor" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/actor/{actor_id}" ; rr:class <http://example.org/ontology#Actor> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#actor_actor_id> ; rr:objectMap [ rr:column "actor_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#actor_first_name> ; rr:objectMap [ rr:column "first_name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#actor_last_name> ; rr:objectMap [ rr:column "last_name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_actor__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"actor_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"actor\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/actor/{actor_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#actor_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_address a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "address" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/address/{address_id}" ; rr:class <http://example.org/ontology#Address> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_address_id> ; rr:objectMap [ rr:column "address_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_address> ; rr:objectMap [ rr:column "address" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_address2> ; rr:objectMap [ rr:column "address2" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_district> ; rr:objectMap [ rr:column "district" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_hasCity> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/city/{city_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_postal_code> ; rr:objectMap [ rr:column "postal_code" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_phone> ; rr:objectMap [ rr:column "phone" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_address__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"address_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"address\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/address/{address_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#address_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_category a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "category" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/category/{category_id}" ; rr:class <http://example.org/ontology#Category> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#category_category_id> ; rr:objectMap [ rr:column "category_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#category_name> ; rr:objectMap [ rr:column "name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_category__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"category_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"category\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/category/{category_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#category_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_city a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "city" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/city/{city_id}" ; rr:class <http://example.org/ontology#City> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#city_city_id> ; rr:objectMap [ rr:column "city_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#city_city> ; rr:objectMap [ rr:column "city" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#city_hasCountry> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/country/{country_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_city__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"city_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"city\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/city/{city_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#city_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_country a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "country" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/country/{country_id}" ; rr:class <http://example.org/ontology#Country> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#country_country_id> ; rr:objectMap [ rr:column "country_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#country_country> ; rr:objectMap [ rr:column "country" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_country__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"country_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"country\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/country/{country_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#country_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_customer a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "customer" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/customer/{customer_id}" ; rr:class <http://example.org/ontology#Customer> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_customer_id> ; rr:objectMap [ rr:column "customer_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_hasStore> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/store/{store_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_first_name> ; rr:objectMap [ rr:column "first_name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_last_name> ; rr:objectMap [ rr:column "last_name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_email> ; rr:objectMap [ rr:column "email" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_hasAddress> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/address/{address_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_active> ; rr:objectMap [ rr:column "active" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] .
+
+map:TM_customer__datetime__create_date a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"customer_id\", replace(\"create_date\", ' ', 'T') AS \"create_date__iso\" FROM \"customer\" WHERE \"create_date\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/customer/{customer_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_create_date> ; rr:objectMap [ rr:column "create_date__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_customer__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"customer_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"customer\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/customer/{customer_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#customer_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_film a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "film" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ; rr:class <http://example.org/ontology#Film> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_film_id> ; rr:objectMap [ rr:column "film_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_title> ; rr:objectMap [ rr:column "title" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_description> ; rr:objectMap [ rr:column "description" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_release_year> ; rr:objectMap [ rr:column "release_year" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_hasLanguage> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/language/{language_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_hasOriginalLanguage> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/language/{original_language_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_rental_duration> ; rr:objectMap [ rr:column "rental_duration" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_rental_rate> ; rr:objectMap [ rr:column "rental_rate" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_length> ; rr:objectMap [ rr:column "length" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_replacement_cost> ; rr:objectMap [ rr:column "replacement_cost" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_rating> ; rr:objectMap [ rr:column "rating" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_special_features> ; rr:objectMap [ rr:column "special_features" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_film__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"film_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"film\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_film_actor a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "film_actor" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film_actor/{actor_id}/{film_id}" ; rr:class <http://example.org/ontology#FilmActor> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_actor_hasActor> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/actor/{actor_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_actor_hasFilm> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_film_actor__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"actor_id\", \"film_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"film_actor\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film_actor/{actor_id}/{film_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_actor_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_film_category a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "film_category" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film_category/{film_id}/{category_id}" ; rr:class <http://example.org/ontology#FilmCategory> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_category_hasFilm> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_category_hasCategory> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/category/{category_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_film_category__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"film_id\", \"category_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"film_category\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film_category/{film_id}/{category_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_category_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_film_text a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "film_text" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film_text/{film_id}" ; rr:class <http://example.org/ontology#FilmText> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_text_film_id> ; rr:objectMap [ rr:column "film_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_text_title> ; rr:objectMap [ rr:column "title" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_text_description> ; rr:objectMap [ rr:column "description" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_inventory a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "inventory" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/inventory/{inventory_id}" ; rr:class <http://example.org/ontology#Inventory> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#inventory_inventory_id> ; rr:objectMap [ rr:column "inventory_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#inventory_hasFilm> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#inventory_hasStore> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/store/{store_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_inventory__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"inventory_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"inventory\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/inventory/{inventory_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#inventory_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_language a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "language" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/language/{language_id}" ; rr:class <http://example.org/ontology#Language> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#language_language_id> ; rr:objectMap [ rr:column "language_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#language_name> ; rr:objectMap [ rr:column "name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_language__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"language_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"language\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/language/{language_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#language_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_payment a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "payment" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/payment/{payment_id}" ; rr:class <http://example.org/ontology#Payment> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_payment_id> ; rr:objectMap [ rr:column "payment_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_hasCustomer> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/customer/{customer_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_hasStaff> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/staff/{staff_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_hasRental> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/rental/{rental_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_amount> ; rr:objectMap [ rr:column "amount" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] .
+
+map:TM_payment__datetime__payment_date a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"payment_id\", replace(\"payment_date\", ' ', 'T') AS \"payment_date__iso\" FROM \"payment\" WHERE \"payment_date\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/payment/{payment_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_payment_date> ; rr:objectMap [ rr:column "payment_date__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_payment__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"payment_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"payment\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/payment/{payment_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#payment_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_rental a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "rental" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/rental/{rental_id}" ; rr:class <http://example.org/ontology#Rental> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_rental_id> ; rr:objectMap [ rr:column "rental_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_hasInventory> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/inventory/{inventory_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_hasCustomer> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/customer/{customer_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_hasStaff> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/staff/{staff_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_rental__datetime__rental_date a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"rental_id\", replace(\"rental_date\", ' ', 'T') AS \"rental_date__iso\" FROM \"rental\" WHERE \"rental_date\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/rental/{rental_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_rental_date> ; rr:objectMap [ rr:column "rental_date__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_rental__datetime__return_date a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"rental_id\", replace(\"return_date\", ' ', 'T') AS \"return_date__iso\" FROM \"rental\" WHERE \"return_date\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/rental/{rental_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_return_date> ; rr:objectMap [ rr:column "return_date__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_rental__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"rental_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"rental\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/rental/{rental_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#rental_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_staff a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "staff" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/staff/{staff_id}" ; rr:class <http://example.org/ontology#Staff> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_staff_id> ; rr:objectMap [ rr:column "staff_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_first_name> ; rr:objectMap [ rr:column "first_name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_last_name> ; rr:objectMap [ rr:column "last_name" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_hasAddress> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/address/{address_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_picture> ; rr:objectMap [ rr:column "picture" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_email> ; rr:objectMap [ rr:column "email" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_hasStore> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/store/{store_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_active> ; rr:objectMap [ rr:column "active" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_username> ; rr:objectMap [ rr:column "username" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_password> ; rr:objectMap [ rr:column "password" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_staff__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"staff_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"staff\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/staff/{staff_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#staff_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_store a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "store" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/store/{store_id}" ; rr:class <http://example.org/ontology#Store> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#store_store_id> ; rr:objectMap [ rr:column "store_id" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#store_hasManagerStaff> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/staff/{manager_staff_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#store_hasAddress> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/address/{address_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_store__datetime__last_update a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT \"store_id\", replace(\"last_update\", ' ', 'T') AS \"last_update__iso\" FROM \"store\" WHERE \"last_update\" IS NOT NULL" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/store/{store_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#store_last_update> ; rr:objectMap [ rr:column "last_update__iso" ; rr:datatype <http://www.w3.org/2001/XMLSchema#dateTime> ] ] .
+
+map:TM_film_actor__link__film_actor_actorAppearsInFilm a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "film_actor" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/actor/{actor_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_actor_actorAppearsInFilm> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ; rr:termType rr:IRI ] ] .
+
+map:TM_film_category__link__film_hasCategory a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "film_category" ] ;
+    rr:subjectMap [ rr:template "http://example.org/movie_3/resource/film/{film_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#film_hasCategory> ; rr:objectMap [ rr:template "http://example.org/movie_3/resource/category/{category_id}" ; rr:termType rr:IRI ] ] .

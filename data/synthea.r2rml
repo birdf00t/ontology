@@ -1,0 +1,133 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://example.org/ontology#> .
+@prefix map: <http://example.org/synthea/mapping#> .
+
+map:TM_all_prevalences a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "all_prevalences" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/all_prevalences/{\"ITEM\"}" ; rr:class <http://example.org/ontology#AllPrevalences> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#all_prevalences_ITEM> ; rr:objectMap [ rr:column "\"ITEM\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#all_prevalences_POPULATION_TYPE> ; rr:objectMap [ rr:column "\"POPULATION TYPE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#all_prevalences_OCCURRENCES> ; rr:objectMap [ rr:column "\"OCCURRENCES\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#all_prevalences_POPULATION_COUNT> ; rr:objectMap [ rr:column "\"POPULATION COUNT\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#all_prevalences_PREVALENCE_RATE> ; rr:objectMap [ rr:column "\"PREVALENCE RATE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#all_prevalences_PREVALENCE_PERCENTAGE> ; rr:objectMap [ rr:column "\"PREVALENCE PERCENTAGE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] .
+
+map:TM_allergies a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "allergies" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/allergies/{\"PATIENT\"}/{\"ENCOUNTER\"}/{\"CODE\"}" ; rr:class <http://example.org/ontology#Allergies> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#allergies_START> ; rr:objectMap [ rr:column "\"START\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#allergies_STOP> ; rr:objectMap [ rr:column "\"STOP\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#allergies_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#allergies_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#allergies_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#allergies_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_careplans a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT *, md5(concat_ws('|', COALESCE(\"ID\"::text, ''), COALESCE(\"START\"::text, ''), COALESCE(\"STOP\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''), COALESCE(\"REASONCODE\"::text, ''), COALESCE(\"REASONDESCRIPTION\"::text, ''))) || '_' || (row_number() OVER (PARTITION BY md5(concat_ws('|', COALESCE(\"ID\"::text, ''), COALESCE(\"START\"::text, ''), COALESCE(\"STOP\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''), COALESCE(\"REASONCODE\"::text, ''), COALESCE(\"REASONDESCRIPTION\"::text, '')))))::text AS \"_rowid\" FROM \"careplans\"" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/careplans/{_rowid}" ; rr:class <http://example.org/ontology#Careplans> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_ID> ; rr:objectMap [ rr:column "\"ID\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_START> ; rr:objectMap [ rr:column "\"START\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_STOP> ; rr:objectMap [ rr:column "\"STOP\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_REASONCODE> ; rr:objectMap [ rr:column "\"REASONCODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#careplans_REASONDESCRIPTION> ; rr:objectMap [ rr:column "\"REASONDESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_claims a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "claims" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/claims/{\"ID\"}" ; rr:class <http://example.org/ontology#Claims> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_ID> ; rr:objectMap [ rr:column "\"ID\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_BILLABLEPERIOD> ; rr:objectMap [ rr:column "\"BILLABLEPERIOD\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_ORGANIZATION> ; rr:objectMap [ rr:column "\"ORGANIZATION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_DIAGNOSIS> ; rr:objectMap [ rr:column "\"DIAGNOSIS\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#claims_TOTAL> ; rr:objectMap [ rr:column "\"TOTAL\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] .
+
+map:TM_conditions a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT *, md5(concat_ws('|', COALESCE(\"START\"::text, ''), COALESCE(\"STOP\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''))) || '_' || (row_number() OVER (PARTITION BY md5(concat_ws('|', COALESCE(\"START\"::text, ''), COALESCE(\"STOP\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, '')))))::text AS \"_rowid\" FROM \"conditions\"" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/conditions/{_rowid}" ; rr:class <http://example.org/ontology#Conditions> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#conditions_START> ; rr:objectMap [ rr:column "\"START\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#conditions_STOP> ; rr:objectMap [ rr:column "\"STOP\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#conditions_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#conditions_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#conditions_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#conditions_hasAllPrevalences> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/all_prevalences/{\"DESCRIPTION\"}" ; rr:termType rr:IRI ] ] .
+
+map:TM_encounters a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "encounters" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ID\"}" ; rr:class <http://example.org/ontology#Encounters> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_ID> ; rr:objectMap [ rr:column "\"ID\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_DATE> ; rr:objectMap [ rr:column "\"DATE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_REASONCODE> ; rr:objectMap [ rr:column "\"REASONCODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#encounters_REASONDESCRIPTION> ; rr:objectMap [ rr:column "\"REASONDESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_immunizations a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "immunizations" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/immunizations/{\"DATE\"}/{\"PATIENT\"}/{\"ENCOUNTER\"}/{\"CODE\"}" ; rr:class <http://example.org/ontology#Immunizations> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#immunizations_DATE> ; rr:objectMap [ rr:column "\"DATE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#immunizations_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#immunizations_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#immunizations_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#immunizations_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_medications a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "medications" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/medications/{\"START\"}/{\"PATIENT\"}/{\"ENCOUNTER\"}/{\"CODE\"}" ; rr:class <http://example.org/ontology#Medications> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_START> ; rr:objectMap [ rr:column "\"START\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_STOP> ; rr:objectMap [ rr:column "\"STOP\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_REASONCODE> ; rr:objectMap [ rr:column "\"REASONCODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#medications_REASONDESCRIPTION> ; rr:objectMap [ rr:column "\"REASONDESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_observations a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT *, md5(concat_ws('|', COALESCE(\"DATE\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''), COALESCE(\"VALUE\"::text, ''), COALESCE(\"UNITS\"::text, ''))) || '_' || (row_number() OVER (PARTITION BY md5(concat_ws('|', COALESCE(\"DATE\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''), COALESCE(\"VALUE\"::text, ''), COALESCE(\"UNITS\"::text, '')))))::text AS \"_rowid\" FROM \"observations\"" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/observations/{_rowid}" ; rr:class <http://example.org/ontology#Observations> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_DATE> ; rr:objectMap [ rr:column "\"DATE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_VALUE> ; rr:objectMap [ rr:column "\"VALUE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#double> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#observations_UNITS> ; rr:objectMap [ rr:column "\"UNITS\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_patients a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "patients" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/patients/{patient}" ; rr:class <http://example.org/ontology#Patients> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_patient> ; rr:objectMap [ rr:column "patient" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_birthdate> ; rr:objectMap [ rr:column "birthdate" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_deathdate> ; rr:objectMap [ rr:column "deathdate" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_ssn> ; rr:objectMap [ rr:column "ssn" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_drivers> ; rr:objectMap [ rr:column "drivers" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_passport> ; rr:objectMap [ rr:column "passport" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_prefix> ; rr:objectMap [ rr:column "prefix" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_first> ; rr:objectMap [ rr:column "first" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_last> ; rr:objectMap [ rr:column "last" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_suffix> ; rr:objectMap [ rr:column "suffix" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_maiden> ; rr:objectMap [ rr:column "maiden" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_marital> ; rr:objectMap [ rr:column "marital" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_race> ; rr:objectMap [ rr:column "race" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_ethnicity> ; rr:objectMap [ rr:column "ethnicity" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_gender> ; rr:objectMap [ rr:column "gender" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_birthplace> ; rr:objectMap [ rr:column "birthplace" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#patients_address> ; rr:objectMap [ rr:column "address" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
+
+map:TM_procedures a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT *, md5(concat_ws('|', COALESCE(\"DATE\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''), COALESCE(\"REASONCODE\"::text, ''), COALESCE(\"REASONDESCRIPTION\"::text, ''))) || '_' || (row_number() OVER (PARTITION BY md5(concat_ws('|', COALESCE(\"DATE\"::text, ''), COALESCE(\"PATIENT\"::text, ''), COALESCE(\"ENCOUNTER\"::text, ''), COALESCE(\"CODE\"::text, ''), COALESCE(\"DESCRIPTION\"::text, ''), COALESCE(\"REASONCODE\"::text, ''), COALESCE(\"REASONDESCRIPTION\"::text, '')))))::text AS \"_rowid\" FROM \"procedures\"" ] ;
+    rr:subjectMap [ rr:template "http://example.org/synthea/resource/procedures/{_rowid}" ; rr:class <http://example.org/ontology#Procedures> ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_DATE> ; rr:objectMap [ rr:column "\"DATE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#date> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_hasPatients> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/patients/{\"PATIENT\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_hasEncounters> ; rr:objectMap [ rr:template "http://example.org/synthea/resource/encounters/{\"ENCOUNTER\"}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_CODE> ; rr:objectMap [ rr:column "\"CODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_DESCRIPTION> ; rr:objectMap [ rr:column "\"DESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_REASONCODE> ; rr:objectMap [ rr:column "\"REASONCODE\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#integer> ] ] ;
+    rr:predicateObjectMap [ rr:predicate <http://example.org/ontology#procedures_REASONDESCRIPTION> ; rr:objectMap [ rr:column "\"REASONDESCRIPTION\"" ; rr:datatype <http://www.w3.org/2001/XMLSchema#string> ] ] .
