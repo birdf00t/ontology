@@ -1,19 +1,21 @@
-"""에이전트 결과를 정답과 나란히 놓고, 기계적으로 채점해 jsonl / csv 에 쌓는다.
+"""에이전트 결과를 정답과 나란히 놓고, 규칙으로 채점해 jsonl / csv 에 쌓는다 (LLM 은 쓰지 않는다).
 
-- 최종 정답(final) = (1) 에이전트 SQL 의 실행 결과가 BIRD 정답 결과와 같다(엄격 EX: 행과 컬럼이 정확히 같음) 이거나
-  (2) 에이전트의 **자연어 답변** 글에 정답 값이 들어 있다. 둘 중 하나면 정답이다. (2)의 확인 방법: 정답 결과의 값(행마다 모든 값)이 답변 글 안에 들어 있는가를 규칙으로 확인한다 (LLM 판정 아님).
-  숫자는 쉼표·$·% 를 무시하고 반올림(0.01 또는 0.5%) 차이를 허용, 글자는 대소문자·공백을 무시하고 포함 여부를 본다.
-  모든 정답 행이 들어 있으면 correct, 절반 이상이면 partial, 아니면 wrong.
-- (참고) SQL 결과 기준 판정(ex, ex_value)도 같이 남기지만 요약 점수에는 쓰지 않는다.
+정답(final) 판정은 두 단계다.
+  1. SQL 결과: 에이전트 SQL 을 실행한 결과가 정답 SQL 의 결과와 행·컬럼까지 같으면 정답 (엄격 EX, BIRD 방식)
+  2. 답변 글: 1번에서 오답인 것 중, 에이전트의 자연어 답변 글에 정답 값이 모두 들어 있으면 정답
+       - 정답 결과의 모든 행에서, 그 행의 모든 값이 답변 글 안에 있어야 한다
+       - 숫자는 쉼표·$ 를 무시하고 반올림(0.01 또는 0.5%) 차이를 허용, % 는 0.123 ↔ 12.3 으로 본다
+       - 글자는 대소문자·공백을 무시하고, 단어 경계로 포함 여부를 본다 (짧은 값이 다른 단어 안에서 우연히 맞는 것을 막음)
+       - 정답 행의 절반 이상만 들어 있으면 partial (정답으로 세지 않음), 그보다 적으면 wrong
+  정답 SQL 이 불안정·변환 불가(gold_unstable / gold_error)이거나 결과가 빈 질문(gold_empty)은 점수에서 뺀다.
+
 - 사람이 직접 판단할 수 있게 질문, 정답 결과, 에이전트의 자연어 답변, 에이전트 SQL 의 실행 결과를 나란히 보여 준다.
-- LLM 판정은 기본으로 끈다 (USE_LLM_JUDGE). 켜면 답변이 맞는지를 LLM 이 말로 설명하는 열이 추가로 채워진다.
-- 정답 SQL 자체가 이 DB 에서 오류가 나면 그 질문은 점수 계산에서 뺀다 (ex = gold_error).
-- 채점 결과는 log/<DB>/evaluation.jsonl 에 한 줄씩 **이어 붙인다**. 이미 채점한 결과 줄은 다시 채점하지 않는다.
+- 에이전트 원본은 log/<DB>/*_evidence.jsonl 에서 읽고, 채점 결과는 output/<DB>/evaluation.jsonl 에 한 줄씩 **이어 붙인다**. 이미 채점한 결과 줄은 다시 채점하지 않는다.
 - evaluation.csv 는 jsonl 에서 매번 새로 만든다 (엑셀 등으로 열어 보는 용도).
 
-실행:
-    python evaluate.py          새로 생긴 결과 줄만 채점하고, 방금 채점한 것을 나란히 출력
-    python evaluate.py show     지금까지 채점한 전체를 나란히 출력 (채점은 안 함)
+실행 (프로젝트 루트에서, DB 는 PG_DB 로 정한다):
+    PG_DB=movie_3 python output/evaluate.py         새로 생긴 결과 줄만 채점하고, 방금 채점한 것을 나란히 출력
+    PG_DB=movie_3 python output/evaluate.py show    지금까지 채점한 전체를 나란히 출력 (채점은 안 함)
 """
 import csv
 import json
@@ -21,36 +23,25 @@ import re
 import sys
 from datetime import datetime
 from decimal import Decimal
-from itertools import combinations, permutations
+from itertools import combinations
 from pathlib import Path
 
-from db import DB_NAME, connect
+ROOT = Path(__file__).resolve().parents[1]      # 프로젝트 루트 (db.py 가 있는 곳)
+sys.path.insert(0, str(ROOT))
+from db import DB_NAME, connect  # noqa: E402
 
-LOG_DIR = Path("log") / DB_NAME
-EVAL_JSONL = LOG_DIR / "evaluation.jsonl"
-EVAL_CSV = LOG_DIR / "evaluation.csv"
-DIFFICULTY = Path("data") / "difficulty.json"   # python question_difficulty.py 가 만든 질문 난이도 (Spider hardness)
-GOLD_PG = Path("data") / f"gold_pg_{DB_NAME}.json"   # 2. query_filter/filter.py 가 만든 PostgreSQL 용 정답
-USE_LLM_JUDGE = False                 # True 면 자연어 답변을 LLM 이 판정하고 이유를 말로 적는다 (API 비용)
-JUDGE_MODEL = "claude-haiku-5-5"      # LLM 판정을 켰을 때의 모델
+LOG_DIR = ROOT / "log" / DB_NAME
+OUT_DIR = ROOT / "output" / DB_NAME               # 채점 결과는 output/<DB>/ 에 저장한다 (log/ 는 에이전트 원본만)
+EVAL_JSONL = OUT_DIR / "evaluation.jsonl"
+EVAL_CSV = OUT_DIR / "evaluation.csv"
+DIFFICULTY = ROOT / "data" / "difficulty.json"   # data/2. query_filter 가 만든 질문 난이도 (Spider hardness)
+GOLD_PG = ROOT / "data" / f"gold_pg_{DB_NAME}.json"   # data/2. query_filter 가 만든 PostgreSQL 용 정답
 SHOW_ROWS = 30                        # 저장·표시할 결과 행 수 (정답 결과, 에이전트 결과 각각)
 
 FIELDS = ["evaluated_at", "db", "condition", "kind", "id", "run_id", "model",
           "difficulty", "sp_c1", "sp_c2", "sp_co", "question", "evidence", "gold_sql", "gold_sql_pg", "gold_result", "final_sql", "agent_result", "answer",
-          "final", "final_basis", "ans", "ans_note", "ex", "ex_note", "ex_value", "ex_value_note", "llm_verdict", "llm_reason", "judge_model",
+          "final", "final_basis", "ex", "ex_note", "ans", "ans_note",
           "gold_rows", "pred_rows", "steps", "sparql_calls", "seconds", "error"]
-
-JUDGE_PROMPT = (
-    "You grade an AI agent's natural-language answer to a question about a database. "
-    "You get the question, the CORRECT result (rows from the reference SQL), and the agent's answer. "
-    "The answer is correct if it states the same facts as the correct result. Harmless extra "
-    "information is fine; wrong values or missing items are not. If the correct result is shown only "
-    "partly (first rows of a long list), judge by the shown rows and the total row count. "
-    "If the answer only gives a count when a list was asked for (or the reverse), it is incorrect. "
-    "Reply with JSON only: {\"verdict\": \"correct\" | \"partial\" | \"incorrect\", "
-    "\"reason\": \"one or two sentences in Korean explaining what matches or what is wrong\"}."
-)
-
 
 def cell(v):
     """값을 비교하기 좋은 형태로: 숫자는 소수 6자리까지, 나머지는 문자열."""
@@ -104,43 +95,6 @@ def close(a, b):
     return abs(a - b) <= max(0.01, 0.005 * max(abs(a), abs(b)))
 
 
-def rows_close(P, G):
-    """두 행 집합이 숫자 반올림 차이만 빼고 같은가."""
-    if len(P) != len(G):
-        return False
-    P, G = sorted(P, key=str), sorted(G, key=str)
-    return all(len(p) == len(g) and all(close(x, y) for x, y in zip(p, g)) for p, g in zip(P, G))
-
-
-def value_grade(gold, pred):
-    """값이 맞는지만 본다. 컬럼 이름, 순서, 질문에 없는 추가 컬럼, 숫자 반올림은 무시한다.
-
-    correct  : 정답의 값(행 × 컬럼)을 에이전트 결과에서 그대로 찾을 수 있다 (정확히 같은 행들)
-    contains : 정답 행을 모두 포함하지만 행이 더 있다 (동점 전부 반환, 목록이 더 길다 등)
-    wrong    : 그 밖 (값이 다르거나, 정답의 일부만 있거나, 컬럼이 모자람)
-    """
-    g_rows, g_cols, g_err = gold
-    p_rows, p_cols, p_err = pred
-    if g_err:
-        return "gold_error", ""
-    if p_err:
-        return "wrong", f"에이전트 SQL 오류: {p_err[:60]}"
-    G, gn, pn = as_set(g_rows), len(g_cols), len(p_cols)
-    if pn < gn:
-        return "wrong", f"컬럼이 더 적음 (정답 {gn}열, 에이전트 {pn}열)"
-    contains = False
-    for idx in combinations(range(pn), gn):
-        for perm in (permutations(idx) if gn <= 3 else [idx]):
-            P = {tuple(cell(x[k]) for k in perm) for x in p_rows}
-            if P == G or rows_close(P, G):
-                return "correct", "" if pn == gn else f"추가 컬럼 {pn - gn}개 무시"
-            if G < P:
-                contains = True
-    if contains:
-        return "contains", "정답 행을 모두 포함하지만 행이 더 있음"
-    return "wrong", ""
-
-
 def ex_grade(gold, pred):
     """(ex 판정, 메모)"""
     g_rows, g_cols, g_err = gold
@@ -186,8 +140,8 @@ def cell_in_answer(v, text, nums):
         num = float(v)
     elif re.fullmatch(r"-?(0|[1-9]\d*)(\.\d+)?", str(v).replace(",", "").strip()):   # 숫자 모양 글자 ('2006'); 앞자리가 0인 값('0123')은 글자로 본다
         num = float(str(v).replace(",", ""))
-    if num is None:
-        return norm_text(v) in text
+    if num is None:                                           # 글자: 단어 경계로 찾는다 (짧은 값 'D' 가 'and' 안에서 우연히 맞는 것을 막는다)
+        return re.search(r"(?<!\w)" + re.escape(norm_text(v)) + r"(?!\w)", text) is not None
     if num.is_integer():
         return any(x == num for x in nums)
     return any(close(x, num) or (abs(num) <= 1 and close(x, num * 100)) for x in nums)   # 0.123 ↔ 12.3%
@@ -218,34 +172,14 @@ def answer_grade(gold, answer):
 
 
 def final_grade(r):
-    """(final 판정, 근거). 정답 = SQL 결과가 정답과 같다(엄격 EX) 또는 답변 글에 정답 값이 들어 있다."""
+    """(final 판정, 근거). 1) SQL 결과가 정답과 같으면 정답, 2) 아니면 답변 글에 정답 값이 모두 있으면 정답."""
     if r["ex"].startswith("gold_") or str(r.get("ans", "")).startswith("gold_"):
         return str(r.get("ans") or r["ex"]), ""
-    sql_ok, ans_ok = r["ex"] == "correct", r.get("ans") == "correct"
-    if sql_ok and ans_ok:
-        return "correct", "SQL 결과 일치 + 답변에 정답 포함"
-    if sql_ok:
-        return "correct", "SQL 결과만 일치 (답변 글에는 정답이 다 없음)"
-    if ans_ok:
-        return "correct", "답변에 정답 포함 (SQL 결과는 다름)"
+    if r["ex"] == "correct":
+        return "correct", "1. SQL 결과(행·컬럼)가 정답과 같음"
+    if r.get("ans") == "correct":
+        return "correct", "2. SQL 결과는 다르지만 답변 글에 정답이 들어 있음"
     return ("partial" if r.get("ans") == "partial" else "wrong"), r.get("ans_note", "")
-
-
-def llm_judge(llm, rec, gold_text):
-    """(선택) 자연어 답변을 정답 결과와 비교해 (verdict, reason) 을 돌려준다."""
-    user = (f"Question: {rec['question']}\n"
-            f"Hint given to the agent: {rec.get('evidence') or '(none)'}\n\n"
-            f"CORRECT result:\n{gold_text}\n\n"
-            f"Agent's answer:\n{rec.get('answer') or '(no answer)'}")
-    try:
-        out = llm.invoke([("system", JUDGE_PROMPT), ("user", user)]).content
-        if isinstance(out, list):
-            out = "".join(b.get("text", "") for b in out if isinstance(b, dict))
-        d = json.loads(re.search(r"\{.*\}", out, re.S).group(0))
-        v = str(d.get("verdict", "")).lower()
-        return (v if v in ("correct", "partial", "incorrect") else "unknown"), str(d.get("reason", ""))
-    except Exception as e:
-        return "unknown", f"판정 실패: {str(e)[:80]}"
 
 
 def load_gold():
@@ -324,8 +258,6 @@ def show(rows):
             print("[에이전트 답변]\n" + "\n".join("   " + l for l in (r.get("answer") or "(없음)").strip().splitlines()[:12]))
             print("[에이전트 SQL] " + " ".join((r.get("final_sql") or "(없음)").split()))
             print("[에이전트 SQL 실행 결과]\n" + "\n".join("   " + l for l in (r.get("agent_result") or "").splitlines()[:12]))
-            if r.get("llm_verdict", "-") != "-":
-                print(f"[LLM 판정] {r['llm_verdict']} — {r['llm_reason']}")
 
 
 def graded(rows):
@@ -335,18 +267,17 @@ def graded(rows):
 
 def summary(rows):
     print("\n요약 (정답이 불안정·오류·빈 결과인 질문은 점수에서 제외)")
-    print("  정답   : (1) 에이전트 SQL 결과가 정답과 같다(엄격 EX) 또는 (2) 답변 글에 정답이 들어 있다 — 둘 중 하나")
-    print("  근거   : 정답 중 SQL 결과로만 / 답변으로만 / 둘 다로 인정된 수")
-    print(f"{'조건':36}{'질문':>5}{'채점':>5}{'정답':>6}{'정답률':>7}{'SQL만':>7}{'답변만':>7}{'둘다':>6}{'평균초':>7}{'도구호출':>8}")
+    print("  정답   : 1) SQL 결과(행·컬럼)가 정답과 같다, 또는 2) 1이 아닌 것 중 답변 글에 정답이 모두 들어 있다")
+    print("  근거   : 정답 중 1번(SQL 결과)으로 인정된 수 / 2번(답변 글)으로 인정된 수")
+    print(f"{'조건':36}{'질문':>5}{'채점':>5}{'정답':>6}{'정답률':>7}{'1.SQL':>7}{'2.답변':>7}{'평균초':>7}{'도구호출':>8}")
     for cond in sorted({r["condition"] for r in rows}):
         v = [r for r in rows if r["condition"] == cond]
         gr = graded(v)
         val = sum(r.get("final") == "correct" for r in gr)
-        only_sql = sum(r.get("final") == "correct" and r["ex"] == "correct" and r.get("ans") != "correct" for r in gr)
-        only_ans = sum(r.get("final") == "correct" and r["ex"] != "correct" and r.get("ans") == "correct" for r in gr)
-        both = sum(r.get("final") == "correct" and r["ex"] == "correct" and r.get("ans") == "correct" for r in gr)
+        by_sql = sum(r.get("final") == "correct" and r["ex"] == "correct" for r in gr)
+        by_ans = val - by_sql
         pct = f"{100 * val / len(gr):.0f}%" if gr else "-"
-        print(f"{cond:36}{len(v):>5}{len(gr):>5}{val:>6}{pct:>7}{only_sql:>7}{only_ans:>7}{both:>6}"
+        print(f"{cond:36}{len(v):>5}{len(gr):>5}{val:>6}{pct:>7}{by_sql:>7}{by_ans:>7}"
               f"{sum(r['seconds'] for r in v) / len(v):>7.1f}{sum(r['steps'] for r in v) / len(v):>8.1f}")
 
 
@@ -384,10 +315,6 @@ def main():
             if (f.stem, rec["id"], rec.get("run_id")) not in done]
     print(f"결과 줄 중 새로 채점할 것: {len(todo)}개 (이미 채점됨: {len(done)}개)")
 
-    llm = None
-    if USE_LLM_JUDGE and todo:
-        from llm import get_llm
-        llm = get_llm(JUDGE_MODEL)
     gold_cache, new_rows, gold_map = {}, [], load_gold()
     print(f"정답 SQL: {'PostgreSQL 용으로 변환한 ' + str(GOLD_PG) if gold_map else '원본 정답 SQL (2. query_filter/filter.py 를 돌리면 변환본을 쓴다)'}")
     EVAL_JSONL.parent.mkdir(parents=True, exist_ok=True)
@@ -402,11 +329,7 @@ def main():
                 gold = gold_cache[rec["id"]]
             pred = run(rec.get("final_sql"))
             ex, note = (forced, why[:80]) if forced else ex_grade(gold, pred)
-            exv, exv_note = (forced, why[:80]) if forced else value_grade(gold, pred)
             ans, ans_note = (forced, why[:80]) if forced else answer_grade(gold, rec.get("answer"))
-            verdict, reason = "-", ""
-            if llm and not ex.startswith("gold_"):
-                verdict, reason = llm_judge(llm, rec, result_text(gold))
             row = {
                 "evaluated_at": datetime.now().isoformat(timespec="seconds"),
                 "db": rec["db_id"], "condition": rec["condition"], "kind": rec["kind"], "id": rec["id"],
@@ -415,8 +338,7 @@ def main():
                 "gold_sql": rec["gold_sql"], "gold_sql_pg": gold_sql, "gold_result": result_text(gold),
                 "final_sql": rec.get("final_sql"), "agent_result": result_text(pred),
                 "answer": rec.get("answer"),
-                "ans": ans, "ans_note": ans_note, "ex": ex, "ex_note": note, "ex_value": exv, "ex_value_note": exv_note, "llm_verdict": verdict, "llm_reason": reason,
-                "judge_model": JUDGE_MODEL if llm else None,
+                "ex": ex, "ex_note": note, "ans": ans, "ans_note": ans_note,
                 "gold_rows": None if gold[2] else len(gold[0]), "pred_rows": None if pred[2] else len(pred[0]),
                 "steps": len(rec["steps"]),
                 "sparql_calls": sum(s["tool"] in ("ontology_query", "sparql_query") for s in rec["steps"]),
@@ -435,7 +357,7 @@ def main():
     show(new_rows)
     summary(rows)
     summary_by_difficulty(rows)
-    print(f"\n채점 결과 → {EVAL_JSONL}\n표 형식    → {EVAL_CSV}\n(전체를 다시 보려면: python evaluate.py show)")
+    print(f"\n채점 결과 → {EVAL_JSONL}\n표 형식    → {EVAL_CSV}\n(전체를 다시 보려면: PG_DB={DB_NAME} python output/evaluate.py show)")
 
 
 if __name__ == "__main__":

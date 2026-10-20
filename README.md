@@ -1,5 +1,5 @@
 ## DB
-BIRD sqlite를 postgresql로 변환하여 사용 (train 데이터셋에서 synthea, movie_3)
+BIRD sqlite를 postgresql로 변환하여 사용 (train 데이터셋에서 synthea, movie_3)  
 paper : https://arxiv.org/pdf/2305.03111  
 code : https://bird-bench.github.io/
 
