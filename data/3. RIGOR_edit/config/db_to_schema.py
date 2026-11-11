@@ -37,7 +37,10 @@ import json
 import re
 from pathlib import Path
 
-import psycopg2
+try:
+    import psycopg2
+except ImportError:   # [CHANGED] psycopg 3 (psycopg) 도 쓸 수 있게 한다
+    import psycopg as psycopg2
 
 HERE = Path(__file__).resolve().parent
 
@@ -77,7 +80,7 @@ order by c.relname, k.conname
 """
 
 
-def extract(conn, pg_schema: str) -> dict:
+def extract(conn, pg_schema: str, skip_composite: bool = False, skipped: list = None) -> dict:
     cur = conn.cursor()
     schema = {}
     cur.execute(COLUMNS_SQL, (pg_schema,))
@@ -97,7 +100,12 @@ def extract(conn, pg_schema: str) -> dict:
                     schema[table]["columns"][c]["nullable"] = False
         else:
             if len(cols) != 1:
-                raise SystemExit(f"composite foreign key on {table}{cols} is not supported by the RIGOR schema format")
+                if skip_composite:   # RIGOR 스키마 형식은 컬럼 하나짜리 FK 만 표현한다: 건너뛰고 목록을 남긴다
+                    if skipped is not None:
+                        skipped.append(f"{table}{list(cols)} -> {ref_table}{list(ref_cols)}")
+                    continue
+                raise SystemExit(f"composite foreign key on {table}{cols} is not supported by the RIGOR schema format "
+                                 "(use --skip-composite-fk to leave composite FKs out and list them)")
             fk = {"column": cols[0], "references_table": ref_table, "references_column": ref_cols[0],
                   "on_update": FK_ACTION[upd], "on_delete": FK_ACTION[dele]}
             if not validated:
@@ -131,10 +139,13 @@ def main() -> None:
     ap.add_argument("--out", type=Path, help="output JSON (default: <script dir>/<dbname>/schema_<dbname>.json)")
     ap.add_argument("--host"); ap.add_argument("--port"); ap.add_argument("--user")
     ap.add_argument("--schema", default="public", help="PostgreSQL schema to read (default public)")
+    ap.add_argument("--skip-composite-fk", action="store_true",
+                    help="leave out composite (multi-column) foreign keys, which the RIGOR schema format cannot express, and print them")
     a = ap.parse_args()
     out = a.out or HERE / a.dbname / f"schema_{a.dbname}.json"
     conn = psycopg2.connect(dbname=a.dbname, host=a.host, port=a.port, user=a.user)
-    s = extract(conn, a.schema)
+    skipped = []
+    s = extract(conn, a.schema, a.skip_composite_fk, skipped)
     inferred = infer_date_types(conn, s)
     conn.close()
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -143,6 +154,10 @@ def main() -> None:
     n_pk = sum(c["primary_key"] for t in s.values() for c in t["columns"].values())
     n_fk = sum(len(t["foreign_keys"]) for t in s.values())
     print(f"{len(s)} tables, {n_col} columns, {n_pk} PK columns, {n_fk} FKs -> {out}")
+    if skipped:
+        print(f"{len(skipped)} composite FKs left out (not expressible in the RIGOR schema format):")
+        for line in skipped:
+            print("  " + line)
     types = {}
     for t in s.values():
         for c in t["columns"].values():

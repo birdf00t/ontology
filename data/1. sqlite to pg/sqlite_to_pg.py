@@ -2,7 +2,9 @@
 """SQLite → PostgreSQL 무손실 이전 + 검증 스크립트.
 
 사용법 (프로젝트 루트에서)
-  python "data/1. sqlite to pg/sqlite_to_pg.py" convert "data/1. sqlite to pg/<DB>.sqlite" --dsn "postgresql://<user>@localhost:5432/<DB>"
+  python "data/1. sqlite to pg/sqlite_to_pg.py" convert <DB 이름> --dsn "postgresql://<user>@localhost:5432/<DB>"
+  <DB 이름>(예: movie_3)은 data/0. bird_structure_types_check/train_databases/<DB>/<DB>.sqlite 를 가리킨다.
+  다른 위치의 파일을 쓰려면 .sqlite 파일 경로를 그대로 줘도 된다.
   변환이 끝나면 원본 SQLite 와 행 단위로 바로 대조(검증)한다. 화면에 나온 내용은 <DB>.log 에 남는다.
 
 원칙
@@ -43,6 +45,22 @@ NUM_RE = re.compile(r"^[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?$")
 
 class MigrationError(Exception):
     pass
+
+
+# BIRD train 데이터베이스가 풀려 있는 폴더 (<DB>/<DB>.sqlite)
+BIRD_DIR = Path(__file__).resolve().parents[1] / "0. bird_structure_types_check" / "train_databases"
+
+
+def resolve_sqlite(arg):
+    """DB 이름이면 BIRD_DIR/<DB>/<DB>.sqlite, 파일 경로이면 그대로 돌려준다."""
+    p = Path(arg)
+    if p.is_file():
+        return p
+    name = p.name[:-7] if p.name.lower().endswith(".sqlite") else p.name
+    for cand in (BIRD_DIR / name / f"{name}.sqlite", BIRD_DIR / f"{name}.sqlite"):
+        if cand.is_file():
+            return cand
+    raise MigrationError(f"SQLite 를 찾지 못했습니다: {arg}  (찾은 위치: {BIRD_DIR / name / (name + '.sqlite')})")
 
 
 def qident(name):
@@ -311,6 +329,7 @@ def convert(args):
                     t["next_id"] = last + 1
 
             print("[5/6] FK")
+            skipped_fks = []
             for t in tables.values():
                 for i, fk in enumerate(t["fks"]):
                     parent = fk[0]["parent"]
@@ -326,6 +345,11 @@ def convert(args):
                     ptab = tables[parent]
                     keysets = ([ptab["pk"]] if ptab["pk"] else []) + ptab["uniques"] + [[c for c, _ in ix["cols"]] for ix in ptab["indexes"] if ix["unique"]]
                     if not any(set(k) == set(to) for k in keysets):
+                        if args.skip_invalid_fk:
+                            skipped_fks.append(dict(table=t["name"], columns=frm, ref_table=parent, ref_columns=to))
+                            print(f"    ! {t['name']}({', '.join(frm)}) → {parent}({', '.join(to)}): 참조 대상에 PK/UNIQUE가 없어 "
+                                  "(원본 SQLite 에서도 'foreign key mismatch') 건너뜀")
+                            continue
                         raise MigrationError(f"{t['name']} → {parent}({', '.join(to)}): 참조 대상 컬럼에 PK/UNIQUE가 없어 "
                                              "PostgreSQL에서 FK를 만들 수 없습니다 (SQLite에서도 'foreign key mismatch' 상태).")
                     ctypes = {c["name"]: c["pgtype"] for c in t["cols"]}
@@ -362,8 +386,10 @@ def convert(args):
                                    stored_kinds=c["kinds"], pg_type=c["pgtype"], not_null=c["notnull"],
                                    sqlite_default=c["default"], pg_default=c["pg_default"]) for c in t["cols"]])
                 for t in tables.values()],
-        foreign_keys=fk_report)
+        foreign_keys=fk_report, skipped_foreign_keys=skipped_fks)
     nv = [f for f in fk_report if f["status"] != "VALID"]
+    for sf in skipped_fks:
+        print(f"  건너뛴 FK: {sf['table']}({', '.join(sf['columns'])}) → {sf['ref_table']}({', '.join(sf['ref_columns'])})")
     print(f"\n완료: 테이블 {len(tables)}개, 행 {sum(t['rows'] for t in tables.values()):,}개, FK {len(fk_report)}개"
           f" (NOT VALID {len(nv)}개), 건너뛴 객체 {len(skipped)}개")
     for t in tables.values():
@@ -424,7 +450,8 @@ def verify(args, report):
             for c, rc, r in zip(t["cols"], rt["columns"], pgcols):
                 if r[2] != (c["notnull"] or c["name"] in pk_set):
                     bad(f"{c['name']}: NOT NULL 불일치 (SQLite {c['notnull']} / PostgreSQL {r[2]})")
-                if r[4] == "" and (c["default"] is not None) != (r[3] is not None):
+                has_default = c["default"] is not None and c["default"].strip().upper() != "NULL"   # DEFAULT NULL 은 '기본값 없음'과 같다
+                if r[4] == "" and has_default != (r[3] is not None):
                     bad(f"{c['name']}: 기본값 유무 불일치 (SQLite {c['default']!r} / PostgreSQL {r[3]!r})")
 
             # 키·인덱스
@@ -458,10 +485,13 @@ def verify(args, report):
             # FK
             rep_fk = {(tuple(f["columns"]), f["ref_table"], tuple(f["ref_columns"])): f for f in report["foreign_keys"] if f["table"] == name}
             pg_fk = [r for r in cons if r[0] == "f"]
-            if len(pg_fk) != len(t["fks"]):
-                bad(f"FK 개수 불일치: PostgreSQL {len(pg_fk)} / SQLite {len(t['fks'])}")
+            skip_keys = {(tuple(sf["columns"]), sf["ref_table"], tuple(sf["ref_columns"]))
+                         for sf in report.get("skipped_foreign_keys", []) if sf["table"] == name}      # 일부러 건너뛴 FK
+            fks_eff = [fk for fk in t["fks"] if (tuple(p["frm"] for p in fk), fk[0]["parent"], tuple(p["to"] for p in fk)) not in skip_keys]
+            if len(pg_fk) != len(fks_eff):
+                bad(f"FK 개수 불일치: PostgreSQL {len(pg_fk)} / SQLite {len(fks_eff)}")
             ptmap = {x["sqlite_name"]: x for x in report["tables"]}
-            for fk in t["fks"]:
+            for fk in fks_eff:
                 key = (tuple(p["frm"] for p in fk), fk[0]["parent"], tuple(p["to"] for p in fk))
                 f = rep_fk.get(key)
                 pmap = {c["sqlite_name"]: c["pg_name"] for c in ptmap[fk[0]["parent"]]["columns"]}
@@ -507,16 +537,22 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("convert", help="SQLite를 PostgreSQL로 옮긴다")
-    c.add_argument("sqlite")
+    c.add_argument("sqlite", help="DB 이름(예: movie_3) 또는 .sqlite 파일 경로")
     c.add_argument("--dsn", required=True, help='예: "postgresql://user@localhost:5432/synthea"')
     c.add_argument("--schema", default="public")
     c.add_argument("--lowercase-identifiers", action="store_true",
                    help="테이블·컬럼 이름을 소문자로 옮긴다 (따옴표 없는 SQL에서 대문자 이름을 쓰기 위함)")
     c.add_argument("--replace", action="store_true", help="같은 이름의 테이블이 있으면 지우고 새로 만든다")
+    c.add_argument("--skip-invalid-fk", action="store_true",
+                   help="참조 대상 컬럼에 PK/UNIQUE 가 없어 원본 SQLite 에서도 깨진 FK 를 건너뛰고 로그에 기록한다 (기본은 중단)")
     c.add_argument("--allow-skip", action="store_true", help="뷰/트리거/가상 테이블을 로그에 기록하고 건너뛴다")
     c.add_argument("--mixed-as-text", action="store_true", help="여러 종류의 값이 섞인 컬럼을 text로 옮긴다")
     args = ap.parse_args()
-    log_path = Path(args.sqlite).with_suffix(".log")         # 화면에 나오는 내용을 그대로 <DB>.log 에 남긴다 (매번 새로 씀)
+    try:
+        args.sqlite = resolve_sqlite(args.sqlite)
+    except MigrationError as e:
+        sys.exit(f"중단: {e}")
+    log_path = Path(__file__).resolve().parent / f"{Path(args.sqlite).stem}.log"   # 화면에 나오는 내용을 그대로 이 폴더의 <DB>.log 에 남긴다 (매번 새로 씀)
     log_file = open(log_path, "w", encoding="utf-8")
 
     class Tee:

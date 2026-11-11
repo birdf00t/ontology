@@ -1,0 +1,11 @@
+# RIGOR run configuration: python app.py --config config/talkingdata/talkingdata.yaml
+db: talkingdata                                  # talkingdata | synthea
+schema: config/talkingdata/schema_talkingdata.json     # optional; default config/<db>/schema_<db>.json
+model: claude-opus-5-5                        # Anthropic API model ID; needs ANTHROPIC_API_KEY in the environment
+docs: null                                   # RAG documents folder (null = none)
+ontologies: null                             # external ontologies folder (null = none)
+effort: null                                 # optional: low | medium | high | xhigh | max (null = model default)
+max_judge_retries: 2
+tables: null                                 # optional FK-closed subset, e.g. [language, film, film_actor, actor]
+r2rml: "generate"                            # off | generate | all   (all = mapping + validation on PostgreSQL)
+# db_url: postgresql+psycopg2://@/talkingdata?host=/tmp&port=5432   # only for r2rml: all

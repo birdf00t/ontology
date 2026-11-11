@@ -13,6 +13,7 @@ from pathlib import Path
 import psycopg
 
 DATA = Path(__file__).resolve().parents[2]      # data/
+BIRD_DIR = DATA / "0. bird_structure_types_check" / "train_databases"   # 원본 SQLite: <DB>/<DB>.sqlite
 
 
 def gold(db, sqlite_path, dsn, questions_path, out_path):
@@ -68,22 +69,50 @@ def gold(db, sqlite_path, dsn, questions_path, out_path):
         real_cols.setdefault(t, {})[c.lower()] = c
         kinds.setdefault(c, set()).add(dt in ("text", "character varying", "character"))
     text_cols = {n for n, k in kinds.items() if k == {True}}      # 모든 테이블에서 text 계열인 컬럼 이름
+    real_tables = {t.lower(): t for t in real_cols}               # 소문자 이름 → 실제 테이블 이름 (SQLite 는 테이블 이름도 대소문자를 구분하지 않는다)
 
     def convert_sql(sql_text):
-        """컬럼 이름을 실제 대소문자로 맞춰 따옴표로 감싸고(PostgreSQL 은 구분함), LIKE 를 ILIKE 로(SQLite 는 구분 안 함) 바꾼 뒤 sqlglot 변환."""
+        """테이블·컬럼 이름을 실제 대소문자로 맞춰 따옴표로 감싸고(PostgreSQL 은 구분함), LIKE 를 ILIKE 로(SQLite 는 구분 안 함) 바꾼 뒤 sqlglot 변환."""
+        needs_quote = lambda n: n != n.lower() or " " in n
         tree = sqlglot.parse_one(sql_text, read="sqlite")
         for scope in traverse_scope(tree):
-            tabs = {alias: src.name for alias, src in scope.sources.items() if isinstance(src, exp.Table)}
+            tabs = {alias: real_tables.get(src.name.lower(), src.name)         # 별칭 → 실제 테이블 이름
+                    for alias, src in scope.sources.items() if isinstance(src, exp.Table)}
             for col in scope.columns:
                 low = col.name.lower()
                 if col.table:
                     t = tabs.get(col.table)
                     cands = [real_cols.get(t, {}).get(low)] if t else []
+                    if t and col.table.lower() == t.lower() and needs_quote(t):   # 별칭 없이 테이블 이름을 그대로 쓴 경우 (Product.ProductID)
+                        col.set("table", exp.to_identifier(t, quoted=True))
                 else:
                     cands = [real_cols[t][low] for t in tabs.values() if low in real_cols.get(t, {})]
                 real = next((c for c in cands if c), None)
-                if real and (real != real.lower() or " " in real):
+                if real and needs_quote(real):
                     col.set("this", exp.to_identifier(real, quoted=True))
+        for tbl in tree.find_all(exp.Table):                                  # FROM / JOIN 의 테이블 이름
+            real = real_tables.get(tbl.name.lower())
+            if real and needs_quote(real):
+                tbl.set("this", exp.to_identifier(real, quoted=True))
+        # 위에서 놓친 컬럼: ORDER BY 에서 SELECT 목록과 같은 이름으로 쓴 컬럼, JOIN ... USING (컬럼)
+        used = {real_tables[t.name.lower()] for t in tree.find_all(exp.Table) if t.name.lower() in real_tables}
+
+        def real_col(low):
+            names = {real_cols[t][low] for t in used if low in real_cols.get(t, {})}
+            return next(iter(names)) if len(names) == 1 else None            # 쿼리의 테이블들에서 철자가 하나로 정해질 때만
+
+        for col in tree.find_all(exp.Column):
+            ident = col.this
+            if isinstance(ident, exp.Identifier) and not ident.quoted:
+                real = real_col(ident.name.lower())
+                if real and needs_quote(real):
+                    col.set("this", exp.to_identifier(real, quoted=True))
+        for join in tree.find_all(exp.Join):
+            for ident in join.args.get("using") or []:
+                real = real_col(ident.name.lower())
+                if real and needs_quote(real):
+                    ident.set("this", real)
+                    ident.set("quoted", True)
         for like in list(tree.find_all(exp.Like)):
             like.replace(exp.ILike(this=like.this, expression=like.expression))
         sqlite_semantics(tree)
@@ -180,7 +209,7 @@ def gold(db, sqlite_path, dsn, questions_path, out_path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("db", help="movie_3 | synthea (questions.json 의 db_id, 원본은 data/1. sqlite to pg/<db>.sqlite)")
+    ap.add_argument("db", help="movie_3 | synthea (questions.json 의 db_id, 원본은 data/0. bird_structure_types_check/train_databases/<db>/<db>.sqlite)")
     ap.add_argument("--dsn", required=True)
     a = ap.parse_args()
-    gold(a.db, DATA / "1. sqlite to pg" / f"{a.db}.sqlite", a.dsn, DATA / "questions.json", DATA / f"gold_pg_{a.db}.json")
+    gold(a.db, BIRD_DIR / a.db / f"{a.db}.sqlite", a.dsn, DATA / "questions.json", DATA / f"gold_pg_{a.db}.json")

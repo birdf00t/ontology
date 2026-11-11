@@ -1,6 +1,6 @@
 """질문 준비 전체: ① 질문 거르기 → ② 정답 SQL 을 PostgreSQL 용으로 변환 → ③ 난이도 라벨.
 
-먼저 1. sqlite to pg 로 두 DB 를 PostgreSQL 에 옮겨 둬야 한다 (②가 그 DB 에서 정답 SQL 을 실행해 본다).
+먼저 1. sqlite to pg 로 DB 를 PostgreSQL 에 옮겨 둬야 한다 (②가 그 DB 에서 정답 SQL 을 실행해 본다).
 
   python "data/2. query_filter/filter.py"                      # ①②③ 전부
   python "data/2. query_filter/filter.py" --user someone       # PostgreSQL 사용자 (기본: 지금 로그인한 사용자)
@@ -21,7 +21,7 @@ sys.path.insert(0, str(HERE / "steps"))   # 하위 폴더: gold_to_pg.py, questi
 import gold_to_pg  # noqa: E402
 import question_difficulty  # noqa: E402
 
-KEEP = ["movie_3", "synthea"]
+KEEP = ["movie_3", "synthea", "talkingdata"]
 SRC = HERE / "train.json"
 DST = DATA / "questions.json"
 
@@ -45,13 +45,15 @@ def main():
     ap.add_argument("--host", default="localhost")
     ap.add_argument("--port", default="5432")
     ap.add_argument("--no-gold", action="store_true", help="정답 SQL 변환을 건너뛴다")
+    ap.add_argument("--dbs", nargs="+", choices=KEEP, default=KEEP,
+                    help="정답 SQL 을 변환할 DB (기본: 전부). 아직 PostgreSQL 에 옮기지 않은 DB 가 있으면 옮긴 것만 고른다")
     a = ap.parse_args()
 
     filter_questions()
     if not a.no_gold:
-        for db in KEEP:
+        for db in a.dbs:
             print(f"\n[2/3] 정답 SQL 변환: {db}")
-            gold_to_pg.gold(db, DATA / "1. sqlite to pg" / f"{db}.sqlite",
+            gold_to_pg.gold(db, gold_to_pg.BIRD_DIR / db / f"{db}.sqlite",
                             f"postgresql://{a.user}@{a.host}:{a.port}/{db}", DST, DATA / f"gold_pg_{db}.json")
     print("\n[3/3] 난이도 라벨")
     question_difficulty.main()
